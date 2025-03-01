@@ -1,4 +1,3 @@
-'use client'
 import {getCurrentUser} from 'aws-amplify/auth';
 import {useEffect, useState} from 'react';
 

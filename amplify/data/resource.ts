@@ -10,7 +10,7 @@ const schema = a.schema({
         candidates: a.hasMany("Candidate", 'employerId'),
         createdAt: a.datetime(),
         updatedAt: a.datetime()
-    }).identifier(["id"]).authorization((allow) => [allow.guest()]),
+    }).identifier(["id"]).authorization((allow) => [allow.guest(),allow.authenticated()]),
     Job: a.model({
         id: a.id(),
         employerId: a.id(),

@@ -3,22 +3,24 @@ import Slogan from "./home/HomeRightPromotion.tsx";
 import NurseCarousel from "./home/nurseCarousel.tsx";
 import Comments from "./home/comments.tsx";
 import AdRight from "./home/adRight.tsx";
-
-// import useStore from "../stores/useStore.ts";
+import Video from "./home/Video.tsx";
+import CompanyTimeline from "./home/CompanyTimeline.tsx";
+import CompanyPartner from "./home/companyPartner.tsx";
 
 export default function Home() {
     // const bears = useStore((state) => state.bears)
     // const increase = useStore((state) => state.increase)
     return (
         <>
-            <div className="bg-base-100">
+            <div className="bg-base-100 ">
                 <div className="">
                     <div className="flex flex-col justify-items-center w-full">
                         <div
                             className="text-center w-full mt-[10px] lg:mt-[40px] 2xl:mt-[100px]  text-6xl font-bold text-white absolute text-nowrap">香港唯一專業印尼護理員的平台
                         </div>
                         <div className="text-center w-full mt-[40px] lg:mt-[90px] 2xl:mt-[150px] p-10 absolute">
-                            <Link to="register" className="btn font-bold text-white text-4xl bg-primary border-0 px-6 btn-lg hover:bg-secondary">立即註冊</Link>
+                            <Link to="register"
+                                  className="btn font-bold text-white text-4xl bg-primary border-0 px-6 btn-lg hover:bg-secondary">立即註冊</Link>
                         </div>
                         <div><img src="/home/home_banner.png" alt="findcare" className="max-w-full min-h-[220px]"></img></div>
                     </div>
@@ -36,20 +38,16 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                {/*<div className="flex justify-around">*/}
-                {/*    <div className="w-[1180px]"><Video></Video></div>*/}
-                {/*</div>*/}
-                {/*<div className="flex justify-around mt-5">*/}
-                {/*    <div className="flex w-[1180px]">*/}
-                {/*        <div className="pb-7 bg-white min-w-[850px] rounded-lg"><CompanyTimeline></CompanyTimeline>*/}
-                {/*        </div>*/}
-                {/*        <div className="bg-white ml-3 w-full rounded-lg"><CompanyPartner></CompanyPartner></div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-
-                {/*<div className="flex">*/}
-                {/*    <Foot></Foot>*/}
-                {/*</div>*/}
+                <div className="flex justify-around">
+                    <div className="w-[1180px]"><Video></Video></div>
+                </div>
+                <div className="flex justify-around mt-5">
+                    <div className="flex w-[1180px]">
+                        <div className="pb-7 bg-white min-w-[850px] rounded-lg mb-5"><CompanyTimeline></CompanyTimeline>
+                        </div>
+                        <div className="bg-white ml-3 w-full rounded-lg mb-5"><CompanyPartner></CompanyPartner></div>
+                    </div>
+                </div>
             </div>
         </>
     )

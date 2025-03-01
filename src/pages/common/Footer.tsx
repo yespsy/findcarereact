@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 
 export default function Footer() {
-    return (<div className="pt-5 w-full">
+    return (<div className="mt-3 w-full">
         <div className="flex bg-white w-full justify-center py-10">
             <div className="text-4xl text-secondary font-bold pt-3">有聘請需要？ 註冊及關注我們的動向！</div>
             <Link to="/register" className="btn btn-lg bg-primary text-white text-3xl ml-5 hover:bg-secondary">立即註冊</Link>

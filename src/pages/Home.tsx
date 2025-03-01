@@ -1,5 +1,7 @@
 import {Link} from "react-router-dom";
 import Slogan from "./home/HomeRightPromotion.tsx";
+import NurseCarousel from "./home/nurseCarousel.tsx";
+import Comments from "./home/comments.tsx";
 
 // import useStore from "../stores/useStore.ts";
 
@@ -24,8 +26,8 @@ export default function Home() {
                 <div className="flex justify-around">
                     <div className="flex flex-row md:basis-full lg:basis-11/12 xl:basis-10/12  2xl:basis-9/12  px-10 max-w-[1280px]">
                         <div className="flex flex-col basis-0656">
-                            {/*<NurseCarousel></NurseCarousel>*/}
-                            {/*<Comments></Comments>*/}
+                            <NurseCarousel></NurseCarousel>
+                            <Comments></Comments>
                         </div>
                         <div className="flex flex-col basis-0344">
                             {/*<AdRight></AdRight>*/}

@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import Dashboard from "./pages/dashboard.tsx";
 import Settings from "./pages/Settings.tsx";
 import AppLayout from "./AppLayout.tsx";
+import AdminNurse from "./pages/admin/nurse/page.tsx";
 
 const AppRoutes: React.FC = () => (
     <Routes>
@@ -13,6 +14,7 @@ const AppRoutes: React.FC = () => (
             <Route index element={<Home/>}/>
             <Route path="settings" element={<Settings/>}/>
         </Route>
+        <Route path="adminNurse" element={<AdminNurse/>}/>
     </Routes>
 );
 

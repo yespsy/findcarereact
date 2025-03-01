@@ -1,15 +1,14 @@
 import {Link} from 'react-router-dom';
 import Logout from "../auth/Logout.tsx";
-import {getCurrentUser} from 'aws-amplify/auth';
 import {useEffect, useState} from 'react';
+import {isUserLogin} from "../../api/utils.ts";
 
 export default function Header() {
     const [isLogin, setIsLogin] = useState(false)
     useEffect(() => {
-        (async () => {
-            const {username} = await getCurrentUser();
-            setIsLogin(username !== '')
-        })()
+        isUserLogin().then(isLogin => {
+            setIsLogin(isLogin)
+        })
     }, []);
 
     return (

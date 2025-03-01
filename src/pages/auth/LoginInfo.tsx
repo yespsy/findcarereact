@@ -1,13 +1,17 @@
 import {useRef, useState} from 'react'
-import {confirmSignIn, signIn} from 'aws-amplify/auth'
-import {Link} from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import {confirmSignIn, confirmSignUp, signIn, signUp} from 'aws-amplify/auth'
+import {Link, useNavigate} from 'react-router-dom';
 
 interface LoginInfoProps {
     type?: string
 }
 
+enum AuthType {
+    login = 'login', register = 'register'
+}
+
 export default function LoginInfo({type}: LoginInfoProps) {
+    const authType: AuthType = type === 'login' ? AuthType.login : AuthType.register;
     const navigate = useNavigate();
     const [number, setNumber] = useState('')
     const [verificationCode, setVerificationCode] = useState('')
@@ -16,19 +20,17 @@ export default function LoginInfo({type}: LoginInfoProps) {
     const [isAgree, setIsAgree] = useState(false)
     const refModal = useRef(null);
 
-    const title = (type === 'login' ? '登陸' : '註冊');
+    const title = (authType === AuthType.login ? '登陸' : '註冊');
 
     function checkPhoneNumber() {
         // 验证手机号格式
         const phoneNumberPattern = /^\d+$/;
-        console.log(number.length)
         if (!phoneNumberPattern.test(number)) {
             // alert('請輸入有效的8位手機號.');
             console.log('number false')
             setIsShowPhoneError(true)
             return false;
         }
-        console.log('number true')
         setIsShowPhoneError(false)
         return true;
     }
@@ -42,32 +44,28 @@ export default function LoginInfo({type}: LoginInfoProps) {
         return true;
     }
 
-    async function sendVerificationCode() {
+    /* 点击 发送验证码 */
+    async function onClickSendVerificationCode() {
         if (!checkPhoneNumber()) {
             return;
         }
-        console.log('--- sendVerificationCode')
-        const {nextStep: signInNextStep} = await signIn({
-            username: "+852" + number,
-            options: {
-                authFlowType: 'USER_AUTH',
-                preferredChallenge: 'SMS_OTP',
+        if (authType === AuthType.login) {
+            await signInStepOne();
+        } else if (authType === AuthType.register) {
+            try {
+                await signUpStepOne();
+            } catch (error) {
+                if (error instanceof Error && error.name === 'UsernameExistsException') {
+                    alert('此手機號已被註冊.')
+                } else {
+                    alert(JSON.stringify(error))
+                }
             }
-        })
-        // if (signInNextStep.signInStep === 'CONTINUE_SIGN_IN_WITH_FIRST_FACTOR_SELECTION') {
-        //     const {nextStep: confirmSignInNextStep} = await confirmSignIn({
-        //         challengeResponse: verificationCode,
-        //     });
-        //     console.dir(confirmSignInNextStep);
-        // }
-        if (signInNextStep.signInStep === 'CONFIRM_SIGN_IN_WITH_SMS_CODE') {
-            alert('短信已發送，請注意查收.')
-        } else {
-            console.dir(signInNextStep);
         }
     }
 
-    async function confirmSignInNextStep() {
+    // 点击 注册/登陆
+    async function onClickFinishButton() {
         if (!(checkPhoneNumber() && checkVerificationCode())) {
             return;
         }
@@ -76,7 +74,80 @@ export default function LoginInfo({type}: LoginInfoProps) {
             refModal.current.showModal();
             return;
         }
+        if (authType === AuthType.login) {
+            await loginStepTwo();
+        } else if (authType === AuthType.register) {
+            try {
+                await signUpStepTwo();
+            } catch (e) {
+                if (e instanceof Error) {
+                    if (e.name === 'ExpiredCodeException') {
+                        alert('无效的验证码!')
+                    }
+                } else {
+                    alert(JSON.stringify(e))
+                }
+            }
+        }
+    }
 
+    // 用户注册 1. 輸入手機號，點擊發送驗證碼
+    async function signUpStepOne() {
+        const {nextStep: signUpNextStep} = await signUp({
+            username: "+852" + number,
+            options: {
+                userAttributes: {
+                    phone_number: "+852" + number,
+                }
+            }
+        })
+        if (signUpNextStep.signUpStep === 'CONFIRM_SIGN_UP') {
+            alert('短信已發送，請注意查收.')
+            console.log(
+                `Code Delivery Medium: ${signUpNextStep.codeDeliveryDetails.deliveryMedium}`,
+            );
+            console.log(
+                `Code Delivery Destination: ${signUpNextStep.codeDeliveryDetails.destination}`,
+            );
+        } else {
+            alert('注册返回未处理代码： ' + signUpNextStep.signUpStep)
+        }
+    }
+
+    // 用户注册 2. 輸入驗證碼，點擊注册
+    async function signUpStepTwo() {
+        const {nextStep: confirmSignUpNextStep} = await confirmSignUp({
+            username: "+852" + number,
+            confirmationCode: verificationCode,
+        });
+        if (confirmSignUpNextStep.signUpStep === 'DONE') {
+            console.log(`SignUp Complete`);
+        } else {
+            alert('出錯了！')
+            console.log('Error. confirmSignUpNextStep.signUpStep: ' + confirmSignUpNextStep.signUpStep)
+        }
+    }
+
+    // 用户登陆 1. 輸入手機號，點擊發送驗證碼
+    async function signInStepOne() {
+        const {nextStep: signInNextStep} = await signIn({
+            username: "+852" + number,
+            options: {
+                authFlowType: 'USER_AUTH',
+                preferredChallenge: 'SMS_OTP',
+            }
+        })
+        //TODO 若用户未注册，但在登陆界面点击发送验证码，这种情况下不会收到短信，是否需要先检查用户是否存在？若无消息提示，用户可能会感到困惑
+        if (signInNextStep.signInStep === 'CONFIRM_SIGN_IN_WITH_SMS_CODE') {
+            alert('短信已發送，請注意查收.')
+        } else {
+            console.dir(signInNextStep);
+            alert('登陆返回未处理代码： ' + signInNextStep.signInStep)
+        }
+    }
+
+    // 用户登陆 2. 輸入驗證碼，點擊注册
+    async function loginStepTwo() {
         const {nextStep: confirmSignInNextStep} = await confirmSignIn({
             challengeResponse: verificationCode,
         });
@@ -87,6 +158,7 @@ export default function LoginInfo({type}: LoginInfoProps) {
             console.log('Error. confirmSignInNextStep.signInStep: ' + confirmSignInNextStep.signInStep)
         }
     }
+
 
     function agree(v: boolean) {
         setIsAgree(v)
@@ -110,17 +182,18 @@ export default function LoginInfo({type}: LoginInfoProps) {
                 <input type="text" placeholder="短信驗證碼" className="input w-full bg-white text-xl mr-9"
                        value={verificationCode} onChange={e => setVerificationCode(e.target.value)}/>
                 <button className="btn bg-white border-0 text-xl text-primary font-medium pr-6"
-                        onClick={() => sendVerificationCode()}>發送驗證碼
+                        onClick={() => onClickSendVerificationCode()}>發送驗證碼
                 </button>
             </div>
             <div className="h-0">
                 {(isShowVerificationError ?
                     <div className="w-[487px] float-left text-primary mt-1 ml-2"><p>請輸入驗證碼</p></div> : null)}
             </div>
-            {(type === 'register' ? <img src='../../../public/login/registry_steps_two.png' alt="findcare" className="my-4"></img> : null)}
+            {(authType === AuthType.register ?
+                <img src='/login/registry_steps_two.png' alt="findcare" className="my-4"></img> : null)}
             <div className="flex flex-row mt-8 w-[487px] justify-items-center">
                 <button className="btn bg-primary border-0 text-xl text-white w-full font-medium h-14"
-                        onClick={() => confirmSignInNextStep()}>{title}
+                        onClick={() => onClickFinishButton()}>{title}
                 </button>
             </div>
             <div className="flex flex-col w-[487px] justify-center mt-36">

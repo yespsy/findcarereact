@@ -1,5 +1,5 @@
 import {useRef, useState} from 'react'
-import {confirmSignIn, confirmSignUp, signIn, signUp} from 'aws-amplify/auth'
+import {autoSignIn, confirmSignIn, confirmSignUp, signIn, signUp} from 'aws-amplify/auth'
 import {Link, useNavigate} from 'react-router-dom';
 
 interface LoginInfoProps {
@@ -98,7 +98,10 @@ export default function LoginInfo({type}: LoginInfoProps) {
             options: {
                 userAttributes: {
                     phone_number: "+852" + number,
-                }
+                },
+                autoSignIn: {
+                    authFlowType: 'USER_AUTH',
+                },
             }
         })
         if (signUpNextStep.signUpStep === 'CONFIRM_SIGN_UP') {
@@ -120,8 +123,15 @@ export default function LoginInfo({type}: LoginInfoProps) {
             username: "+852" + number,
             confirmationCode: verificationCode,
         });
-        if (confirmSignUpNextStep.signUpStep === 'DONE') {
-            console.log(`SignUp Complete`);
+        if (confirmSignUpNextStep.signUpStep === 'COMPLETE_AUTO_SIGN_IN') {
+            const { nextStep } = await autoSignIn();
+            if (nextStep.signInStep === 'DONE') {
+                //TODO 注册成功，创建雇主对象
+                alert('注册成功！');
+                navigate('/dashboard')
+            }
+        }else if (confirmSignUpNextStep.signUpStep === 'DONE') {
+            navigate('/login')
         } else {
             alert('出錯了！')
             console.log('Error. confirmSignUpNextStep.signUpStep: ' + confirmSignUpNextStep.signUpStep)

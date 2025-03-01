@@ -1,9 +1,17 @@
 import {Link} from 'react-router-dom';
 import Logout from "../auth/Logout.tsx";
+import {getCurrentUser} from 'aws-amplify/auth';
+import {useEffect, useState} from 'react';
 
 export default function Header() {
-    //TODO fetch user
-    const isLogin = false
+    const [isLogin, setIsLogin] = useState(false)
+    useEffect(() => {
+        (async () => {
+            const {username} = await getCurrentUser();
+            setIsLogin(username !== '')
+        })()
+    }, []);
+
     return (
         <>
             <div className="flex h-[118px] max-w-full justify-center">
@@ -37,3 +45,4 @@ export default function Header() {
             </div>
         </>);
 }
+

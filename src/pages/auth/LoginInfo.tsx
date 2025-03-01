@@ -1,13 +1,14 @@
 import {useRef, useState} from 'react'
 import {confirmSignIn, signIn} from 'aws-amplify/auth'
 import {Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginInfoProps {
     type?: string
 }
 
 export default function LoginInfo({type}: LoginInfoProps) {
-    // const router = useRouter()
+    const navigate = useNavigate();
     const [number, setNumber] = useState('')
     const [verificationCode, setVerificationCode] = useState('')
     const [isShowPhoneError, setIsShowPhoneError] = useState(false)
@@ -80,7 +81,7 @@ export default function LoginInfo({type}: LoginInfoProps) {
             challengeResponse: verificationCode,
         });
         if (confirmSignInNextStep.signInStep === 'DONE') {
-            //TODO router.push('/dashboard')
+            navigate('/dashboard')
         } else {
             alert('出錯了！')
             console.log('Error. confirmSignInNextStep.signInStep: ' + confirmSignInNextStep.signInStep)

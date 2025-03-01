@@ -1,8 +1,8 @@
-import Foot from "../common/Footer.tsx";
 import JobDetail from "./JobDetail";
 import Candidate from "./Candidate";
 import {getProfile} from "../../api/employerService";
 import Recommend from "./Recommend.tsx";
+import CurrentUser from "./CurrentUser.tsx";
 
 export default function Dashboard() {
 
@@ -14,7 +14,7 @@ export default function Dashboard() {
                     <div className="flex flex-col md:basis-full lg:basis-11/12 xl:basis-10/12 2xl:basis-9/12">
                         <div className="float-left"></div>
                         <div className="font-bold text-3xl py-6 text-primary">
-                            {employer.phone}，您好!
+                            {employer.phone}，您好!<CurrentUser></CurrentUser>
                         </div>
                         <div>
                             <JobDetail employer={employer}></JobDetail>
@@ -28,10 +28,6 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </div>
-
-                </div>
-                <div className="flex justify-around">
-                    <Foot></Foot>
                 </div>
             </div>
         </>

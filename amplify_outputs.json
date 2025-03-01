@@ -578,9 +578,11 @@
           "files/*": {
             "guest": [
               "get",
-              "list",
-              "write",
-              "delete"
+              "list"
+            ],
+            "authenticated": [
+              "get",
+              "list"
             ]
           }
         }

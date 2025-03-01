@@ -2,7 +2,7 @@
 import {getCurrentUser} from 'aws-amplify/auth';
 import {useEffect, useState} from 'react';
 
-export default function Page() {
+export default function CurrentUser() {
     const [loginName, setLoginName] = useState('')
     useEffect(() => {
         async function get() {

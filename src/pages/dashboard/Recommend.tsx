@@ -44,7 +44,7 @@ export default function Recommend() {
         <>
             <div className="flex justify-between">
                 <p className="ml-5 mt-5 font-bold text-2xl">智能推薦</p>
-                <img src='../../../public/common/icon_refresh.png' alt="" className="w-8 h-8 mr-10 mt-3"></img>
+                <img src='/common/icon_refresh.png' alt="" className="w-8 h-8 mr-10 mt-3"></img>
             </div>
             <div className="pb-8 ml-1">
                 {nurses.map((n) => (
@@ -54,7 +54,7 @@ export default function Recommend() {
                         <div className="flex flex-row max-w-full justify-between mx-3 my-1">
                             <div className="flex flex-row">
                                 <p className="flex text-lg font-bold w-fit">{n.name}</p>
-                                <img onClick={() => favor(n.id)} src={isFavor ? '../../../public/common/icon_favor.png' : '../../../public/common/icon_no_favor.png'} alt=""
+                                <img onClick={() => favor(n.id)} src={isFavor ? '/common/icon_favor.png' : '/common/icon_no_favor.png'} alt=""
                                      width={27} height={20} className="ml-3 hover:cursor-pointer"/>
                             </div>
                             <p className="text-secondary text-sm font-bold pt-1">{n.rank}</p>
@@ -69,7 +69,7 @@ export default function Recommend() {
                         <div className="flex flex-row max-w-full justify-between mx-3 my-1 text-xs">
                             <p className="text-gray-400 font-bold mt-1">Preview PDF</p>
                             <p className="font-bold hover:cursor-pointer" onClick={() => previewPdf(n.resumePdfPath)}>
-                                <img src='../../../public/common/pdf_download.png' alt={""} width={25} height={25}/>
+                                <img src='/common/pdf_download.png' alt={""} width={25} height={25}/>
                             </p>
                             <DialogModal ref={previewPdfRef}>
                                 <PdfViewer src={pdfDownloadLink}></PdfViewer>

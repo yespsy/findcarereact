@@ -4,7 +4,7 @@ interface CandidateFilterProps {
     update: (value: (((prevState: string) => string) | string)) => void
 }
 
-export default function Page({update}: CandidateFilterProps) {
+export default function CandidateFilter({update}: CandidateFilterProps) {
     const myRef = useRef(null);
     const [filterName, setFilterName] = useState('全部')
     // @ts-expect-error none

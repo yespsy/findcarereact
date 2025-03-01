@@ -2,7 +2,7 @@ import {Route, Routes} from 'react-router-dom';
 import Home from './pages/Home';
 import Dashboard from "./pages/dashboard/Dashboard.tsx";
 import AppLayout from "./AppLayout.tsx";
-import AdminNurse from "./pages/admin/nurse/page.tsx";
+import AdminNurse from "./pages/admin/nurse/NurseAdmin.tsx";
 import Auth from './pages/auth/Auth.tsx'
 import Register from "./pages/auth/Register.tsx";
 const AppRoutes: React.FC = () => (

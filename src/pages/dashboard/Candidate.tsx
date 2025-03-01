@@ -1,4 +1,4 @@
-import CandidateFilter from "./candidateFilter";
+import CandidateFilter from "./CandidateFilter.tsx";
 import {Employer, Nurse} from "../../entity";
 import {useRef, useState} from "react";
 import PdfViewer from "../common/PdfViewer.tsx";
@@ -70,7 +70,7 @@ export default function Page({employer}: CandidateProps) {
                                             <div className="text-xl text-gray-400 font-normal break-keep text-nowrap">Preview PDF</div>
                                         </div>
                                         <div onClick={() => previewPDf(c.nurse)} className="hover:cursor-pointer">
-                                            <img src='../../../public/common/pdf_download.png' alt="" width={50} height={50} className="pt-3 ml-8 min-w-[40px]"></img>
+                                            <img src='/common/pdf_download.png' alt="" width={50} height={50} className="pt-3 ml-8 min-w-[40px]"></img>
                                         </div>
 
                                     </td>

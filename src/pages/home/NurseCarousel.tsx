@@ -6,7 +6,7 @@ import {getUrl} from 'aws-amplify/storage';
 import DialogModal from "../common/DialogModal";
 import PdfViewer from "../common/PdfViewer.tsx";
 
-export default function Page() {
+export default function NurseCarousel() {
     const [nurses, setNurses] = useState<Nurse[]>([])
     const [pdfDownloadLink, setPdfDownloadLink] = useState('')
     const previewPdfRef = useRef(null)
@@ -54,7 +54,7 @@ export default function Page() {
                         <div className="flex flex-row max-w-full justify-between mx-3 my-1 text-xs">
                             <p className="text-gray-400 font-bold mt-1">Preview PDF</p>
                             <p className="font-bold" onClick={() => previewPdf(n.resumePdfPath)}>
-                                <img src="../../../public/common/pdf_download.png" alt={""} width={25} height={25}/>
+                                <img src="/common/pdf_download.png" alt={""} width={25} height={25}/>
                             </p>
                             <DialogModal ref={previewPdfRef}>
                                 <PdfViewer src={pdfDownloadLink}></PdfViewer>

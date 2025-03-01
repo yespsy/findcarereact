@@ -7,7 +7,7 @@ import '@aws-amplify/ui-react/styles.css';
 import PdfViewer from "../../common/PdfViewer.tsx";
 import DialogModal from "../../common/DialogModal";
 
-export default function Page() {
+export default function ListNurse() {
     const previewPdfRef = useRef(null)
     const selectAvatarFileRef = useRef(null);
     const selectPdfFileRef = useRef(null);

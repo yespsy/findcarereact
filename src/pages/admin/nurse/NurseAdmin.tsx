@@ -1,6 +1,6 @@
-import ListNurse from "./listNurse";
+import ListNurse from "./ListNurse.tsx";
 
-export default function Page() {
+export default function NurseAdmin() {
     return (
         <div className="flex flex-col justify-center">
             <ListNurse/>

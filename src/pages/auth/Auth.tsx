@@ -9,7 +9,7 @@ export default function Auth() {
                     <div
                         className="flex bg-white sm:basis-11/12 md:basis-10/12 lg:basis-9/12 xl:basis-8/12 rounded-3xl h-[785px] max-w-screen-lg">
                         <div className="lg:w-min basis-1/3 bg-base-100 rounded-tl-3xl rounded-bl-3xl">
-                            <img src='../../../public/logo.png' alt="findcare"
+                            <img src='/logo.png' alt="findcare"
                                  className="float-left w-[100px] h-[100px] mt-[70px] ml-[22px]"></img>
                             <div className="mt-[97px] text-base font-bold text-nowrap text-[#EFAAE9]">香港唯一專業</div>
                             <div className="text-base text-nowrap text-secondary">印尼護理員的平臺</div>

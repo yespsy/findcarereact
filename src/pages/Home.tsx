@@ -1,11 +1,11 @@
 import {Link} from "react-router-dom";
 import Slogan from "./home/HomeRightPromotion.tsx";
-import NurseCarousel from "./home/nurseCarousel.tsx";
-import Comments from "./home/comments.tsx";
-import AdRight from "./home/adRight.tsx";
+import NurseCarousel from "./home/NurseCarousel.tsx";
+import Comments from "./home/Comments.tsx";
+import AdRight from "./home/AdRight.tsx";
 import Video from "./home/Video.tsx";
 import CompanyTimeline from "./home/CompanyTimeline.tsx";
-import CompanyPartner from "./home/companyPartner.tsx";
+import CompanyPartner from "./home/CompanyPartner.tsx";
 
 export default function Home() {
     // const bears = useStore((state) => state.bears)

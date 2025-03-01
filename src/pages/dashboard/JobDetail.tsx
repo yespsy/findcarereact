@@ -11,7 +11,7 @@ export default function JobDetail({employer}: JobDetailProps) {
             <div className="text-2xl pl-7 pt-5 font-bold">
                 <span>發布的職位 (1/1)</span><span className="ml-8 text-primary">{job?.title}</span>
             </div>
-            <img src='../../../public/common/icon_edit.png' alt="" className="float-right mr-6" width={45} height={45}></img>
+            <img src='/common/icon_edit.png' alt="" className="float-right mr-6" width={45} height={45}></img>
             <div className="text-xl pl-7 pt-3 font-bold">
                 <span>{job?.nurseRank}</span><span className="ml-8 text-secondary">{job?.salary}</span>
             </div>

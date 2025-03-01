@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Page() {
+export default function Comments() {
     const c = {
         name: 'Mr Hui',
         data: '7 Feb',

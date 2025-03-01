@@ -53,7 +53,7 @@ export default function Requirement() {
                     </div>
                 ))}
 
-                <img src='../../../public/login/registry_steps_one.png' alt="findcare" className="my-4"></img>
+                <img src='/login/registry_steps_one.png' alt="findcare" className="my-4"></img>
                 <div className="flex flex-row mt-4 justify-items-center">
                     <button className="btn bg-primary border-0 text-xl text-white w-full font-medium h-14"
                             onClick={() => {

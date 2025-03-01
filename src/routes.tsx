@@ -5,12 +5,14 @@ import AppLayout from "./AppLayout.tsx";
 import AdminNurse from "./pages/admin/nurse/NurseAdmin.tsx";
 import Auth from './pages/auth/Auth.tsx'
 import Register from "./pages/auth/Register.tsx";
+import DevPlay from "./pages/dev/DevPlay.tsx";
 const AppRoutes: React.FC = () => (
     <Routes>
         <Route path="/" element={<AppLayout />}>
             <Route index element={<Home />}/>
             <Route path='login' element={<Auth />}/>
             <Route path='register' element={<Register />}/>
+            <Route path='dev' element={<DevPlay />}/>
         </Route>
         <Route path="dashboard" element={<AppLayout/>}>
             <Route index element={<Dashboard/>}/>

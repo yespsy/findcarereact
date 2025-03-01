@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 import Slogan from "./home/HomeRightPromotion.tsx";
 import NurseCarousel from "./home/nurseCarousel.tsx";
 import Comments from "./home/comments.tsx";
+import AdRight from "./home/adRight.tsx";
 
 // import useStore from "../stores/useStore.ts";
 
@@ -30,7 +31,7 @@ export default function Home() {
                             <Comments></Comments>
                         </div>
                         <div className="flex flex-col basis-0344">
-                            {/*<AdRight></AdRight>*/}
+                            <AdRight></AdRight>
                             <Slogan></Slogan>
                         </div>
                     </div>

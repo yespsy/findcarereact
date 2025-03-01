@@ -1,15 +1,15 @@
 import service from "../../api/service";
-import {Nurse} from "../../entity";
 import {useEffect, useRef, useState} from "react";
-import {StorageImage} from '@aws-amplify/ui-react-storage';
-import {getUrl} from 'aws-amplify/storage';
-import DialogModal from "../common/DialogModal";
-import PdfViewer from "../common/PdfViewer.tsx";
+import {Nurse} from "../../entity";
+import {StorageImage} from "@aws-amplify/ui-react-storage";
+import PdfViewer from "../../pages/common/PdfViewer";
+import DialogModal from "../../pages/common/DialogModal";
+import {getUrl} from "aws-amplify/storage";
 
-export default function Page() {
-    const [nurses, setNurses] = useState<Nurse[]>([])
-    const [pdfDownloadLink, setPdfDownloadLink] = useState('')
+export default function Recommend() {
+    const [nurses, setNurses] = useState<Nurse[]>([]);
     const previewPdfRef = useRef(null)
+    const [pdfDownloadLink, setPdfDownloadLink] = useState('')
 
     async function previewPdf(url: string) {
         const link = await genPdfViewer(url)
@@ -27,21 +27,36 @@ export default function Page() {
 
     useEffect(() => {
         async function loadData() {
-            const data = await service().nurseService?.getNurses(3);
+            const data = await service().nurseService.getNurses(4);
             // @ts-expect-error ignore
             setNurses(data);
         }
 
         loadData().then()
     }, []);
+    const isFavor = false;
+
+    function favor(id: string | undefined) {
+        console.log(id)
+    }
+
     return (
         <>
-            <div className="flex flex-row justify-between pt-8 mr-4">
+            <div className="flex justify-between">
+                <p className="ml-5 mt-5 font-bold text-2xl">智能推薦</p>
+                <img src='../../../public/common/icon_refresh.png' alt="" className="w-8 h-8 mr-10 mt-3"></img>
+            </div>
+            <div className="pb-8 ml-1">
                 {nurses.map((n) => (
-                    <div key={n.id} className="max-w-full w-[220px] h-[280px] border-2 shadow-lg rounded-2xl mr-2">
-                        <StorageImage alt="findcare" path={n.avatarPath} width={220} height={165} onGetUrlError={(e) => console.dir(e)}/>
+                    <div key={n.id}
+                         className="ml-4 mt-4 w-[220px] h-[280px] border-2 shadow-lg rounded-2xl inline-block">
+                        <StorageImage alt="findcare" path={n.avatarPath} width={220} height={165}/>
                         <div className="flex flex-row max-w-full justify-between mx-3 my-1">
-                            <p className="text-lg font-bold">{n.name}</p>
+                            <div className="flex flex-row">
+                                <p className="flex text-lg font-bold w-fit">{n.name}</p>
+                                <img onClick={() => favor(n.id)} src={isFavor ? '../../../public/common/icon_favor.png' : '../../../public/common/icon_no_favor.png'} alt=""
+                                     width={27} height={20} className="ml-3 hover:cursor-pointer"/>
+                            </div>
                             <p className="text-secondary text-sm font-bold pt-1">{n.rank}</p>
                         </div>
                         <div className="rounded-lg bg-[#43A047] max-w-fit ml-3">
@@ -53,8 +68,8 @@ export default function Page() {
                         </div>
                         <div className="flex flex-row max-w-full justify-between mx-3 my-1 text-xs">
                             <p className="text-gray-400 font-bold mt-1">Preview PDF</p>
-                            <p className="font-bold" onClick={() => previewPdf(n.resumePdfPath)}>
-                                <img src="../../../public/common/pdf_download.png" alt={""} width={25} height={25}/>
+                            <p className="font-bold hover:cursor-pointer" onClick={() => previewPdf(n.resumePdfPath)}>
+                                <img src='../../../public/common/pdf_download.png' alt={""} width={25} height={25}/>
                             </p>
                             <DialogModal ref={previewPdfRef}>
                                 <PdfViewer src={pdfDownloadLink}></PdfViewer>
@@ -63,6 +78,7 @@ export default function Page() {
                     </div>
                 ))}
             </div>
-        </>);
+        </>
+    );
 }
 

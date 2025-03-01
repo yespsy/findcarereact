@@ -4,7 +4,7 @@ import {useEffect, useRef, useState} from "react";
 import {getUrl, remove, uploadData} from 'aws-amplify/storage';
 import {StorageImage} from '@aws-amplify/ui-react-storage';
 import '@aws-amplify/ui-react/styles.css';
-import PdfViewer from "../../common/pdfViewer";
+import PdfViewer from "../../common/PdfViewer.tsx";
 import DialogModal from "../../common/DialogModal";
 
 export default function Page() {

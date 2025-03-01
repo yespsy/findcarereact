@@ -7,7 +7,7 @@ interface PdfViewerProps {
     src?: string
 }
 
-export default function Page({src}: PdfViewerProps) {
+export default function PdfViewer({src}: PdfViewerProps) {
     pdfjs.GlobalWorkerOptions.workerSrc = new URL(
         //'pdfjs-dist/build/pdf.worker.min.mjs',
         'pdfjs-dist/legacy/build/pdf.worker.min.js',

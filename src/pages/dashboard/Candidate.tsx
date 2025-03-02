@@ -10,6 +10,7 @@ interface CandidateProps {
 
 export default function Page({employer}: CandidateProps) {
     const nurses = employer.candidates
+    console.dir(nurses);
     const [filterStr, setFilterStr] = useState('all')
     const previewPdfRef = useRef(null);
     const [previewPdfPath, setPreviewPdfPath] = useState<string>('')

@@ -25,7 +25,7 @@ export const useEmployerStore = createStore<EmployerStore>()(
                     }
                 }))
             },
-            clear: ()=>set(()=>({employer:{name: '', phone: 'clear', coin: 0, id: ''}}))
+            clear: ()=>set(()=>({employer:{name: '', phone: '', coin: 0, id: ''}}))
         }),
         { name: 'employer-storage' },
     ),

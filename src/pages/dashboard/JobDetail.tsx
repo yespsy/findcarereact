@@ -6,7 +6,6 @@ interface JobDetailProps {
 
 export default function JobDetail({employer}: JobDetailProps) {
     const job = employer.job;
-    console.dir(employer);
     return (
         <div className="bg-white w-full mb-3 rounded-2xl">
             <div className="text-2xl pl-7 pt-5 font-bold">

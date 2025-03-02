@@ -111,12 +111,12 @@ export default function LoginInfo({type}: LoginInfoProps) {
         })
         if (signUpNextStep.signUpStep === 'CONFIRM_SIGN_UP') {
             alert('短信已發送，請注意查收.')
-            console.log(
-                `Code Delivery Medium: ${signUpNextStep.codeDeliveryDetails.deliveryMedium}`,
-            );
-            console.log(
-                `Code Delivery Destination: ${signUpNextStep.codeDeliveryDetails.destination}`,
-            );
+            // console.log(
+            //     `Code Delivery Medium: ${signUpNextStep.codeDeliveryDetails.deliveryMedium}`,
+            // );
+            // console.log(
+            //     `Code Delivery Destination: ${signUpNextStep.codeDeliveryDetails.destination}`,
+            // );
         } else {
             alert('注册返回未处理代码： ' + signUpNextStep.signUpStep)
         }

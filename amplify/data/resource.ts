@@ -29,11 +29,11 @@ const schema = a.schema({
         .authorization((allow) => [allow.publicApiKey().to(['read']), allow.owner()]),
     Candidate: a.model({
         id: a.id(),
-        employerId: a.id(),
+        employerId: a.string().default(''),
         employer: a.belongsTo("Employer", 'employerId'),
         nurse: a.belongsTo("Nurse", 'nurseId'),
-        nurseId: a.id(),
-        status: a.string().default(''),
+        nurseId: a.string().default(''),
+        status: a.string().default('發送邀請'),
         interviewDate: a.string().default(''),
         isFavor: a.boolean().default(false),
         isNew: a.boolean().default(false),
@@ -55,7 +55,7 @@ const schema = a.schema({
         createdAt: a.datetime(),
         updatedAt: a.datetime()
     }).identifier(["id"])
-        .authorization((allow) => [allow.publicApiKey()]),
+        .authorization((allow) => [allow.publicApiKey(), allow.authenticated().to(['read'])]),
 });
 
 export type Schema = ClientSchema<typeof schema>;

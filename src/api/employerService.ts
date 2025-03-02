@@ -8,7 +8,7 @@ import {Employer} from "../entity.ts";
 const client = generateClient<Schema>();
 Amplify.configure(outputs);
 
-const selectionSetOfEmployer = ['id', 'name', 'phone', 'coin', 'job.*', 'candidates.*'] as const;
+const selectionSetOfEmployer = ['id', 'name', 'phone', 'coin', 'job.*', 'candidates.*', 'candidates.nurse.*'] as const;
 type EmployerAll = SelectionSet<Schema['Employer']['type'], typeof selectionSetOfEmployer>;
 
 function convertToEntity(e: EmployerAll) {
@@ -34,6 +34,36 @@ function convertToEntity(e: EmployerAll) {
             title: job.title!
         }
     }
+    if (e.candidates) {
+        employer.candidates = []
+        e.candidates.map(c => {
+            let nurse = undefined
+            if (c.nurse) {
+                nurse = {
+                    id: c.nurse.id!,
+                    name: c.nurse.name!,
+                    rank: c.nurse.rank!,
+                    status: c.nurse.status!,
+                    experience: c.nurse.experience!,
+                    avatarPath: c.nurse.avatarPath!,
+                    resumeContent: c.nurse.resumeContent!,
+                    resumePdfPath: c.nurse.resumePdfPath!
+                }
+            }
+
+            employer.candidates?.push({
+                id: c.id!,
+                isAlreadyInterviewed: c.isAlreadyInterviewed!,
+                isFavor: c.isFavor!,
+                isNew: c.isNew!,
+                interviewDate: c.interviewDate!,
+                nurse: nurse,
+                status: c.status!
+            })
+        })
+    }
+    console.dir(e);
+    console.dir(employer);
     return employer
 }
 

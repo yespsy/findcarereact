@@ -21,7 +21,7 @@ export default function Dashboard() {
                         </div>
                         <div className="flex justify-around mt-2">
                             <div className="flex flex-col w-full  pr-3">
-                                <Candidate employer={employer}></Candidate>
+                                <Candidate></Candidate>
                             </div>
                             <div className=" bg-white rounded-2xl h-fit max-w-[500px]">
                                 <Recommend></Recommend>

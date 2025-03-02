@@ -26,7 +26,7 @@ export default function ListNurse() {
     const style = "ml-1 mr-3 mt-2 bg-green-200"
 
     const newNurse: Nurse = {
-        name, rank, status: status_, experience, avatarPath: "", resumeContent: "", resumePdfPath: "",
+        name, rank, status: status_, experience, avatarPath: "", resumeContent: "", resumePdfPath: "", id: ""
     }
 
     async function addNurse() {
@@ -184,7 +184,7 @@ export default function ListNurse() {
     }
 
     async function updateNurse() {
-        const updateNurse = {id, ...newNurse} as Nurse;
+        const updateNurse = {...newNurse} as Nurse;
         updateNurse.avatarPath = avatarPath
         updateNurse.resumePdfPath = pdfPath
         console.dir(updateNurse);

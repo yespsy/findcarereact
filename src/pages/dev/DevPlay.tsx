@@ -39,7 +39,7 @@ export default function DevPlay() {
     }
 
     function clearStore() {
-        // useEmployerStore.getState().clear();
+        useEmployerStore.getState().clear();
     }
 
     return (

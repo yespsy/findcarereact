@@ -1,16 +1,15 @@
 import CandidateFilter from "./CandidateFilter.tsx";
-import {Employer, Nurse} from "../../entity";
+import {Nurse} from "../../entity";
 import {useRef, useState} from "react";
 import PdfViewer from "../common/PdfViewer.tsx";
 import DialogModal from "../common/DialogModal";
+import { StorageImage } from "@aws-amplify/ui-react-storage";
+import {useEmployerStore} from "../../stores/useStore.ts";
+import { useStore } from "zustand/react";
 
-interface CandidateProps {
-    employer: Employer
-}
-
-export default function Page({employer}: CandidateProps) {
+export default function Page() {
+    const employer = useStore(useEmployerStore, state => state.employer)
     const nurses = employer.candidates
-    console.dir(nurses);
     const [filterStr, setFilterStr] = useState('all')
     const previewPdfRef = useRef(null);
     const [previewPdfPath, setPreviewPdfPath] = useState<string>('')
@@ -61,8 +60,9 @@ export default function Page({employer}: CandidateProps) {
                                         <div className="avatar ml-5 min-w-[80px]">
                                             <div className="rounded-full mask mask-circle">
                                                 <div className="w-[70px] h-[70px]">
-                                                    <img src={c.nurse ? c.nurse.avatarPath : ''} alt="" className=""
-                                                         sizes="(max-width: 100%) 50vw (max-height: 100%) 50vw"></img>
+                                                    <StorageImage alt="findcare" path={c.nurse ? c.nurse.avatarPath : ''} sizes="(max-width: 100%) 50vw (max-height: 100%) 50vw"></StorageImage>
+                                                    {/*<img src={c.nurse ? c.nurse.avatarPath : ''} alt="" className=""*/}
+                                                    {/*     sizes="(max-width: 100%) 50vw (max-height: 100%) 50vw"></img>*/}
                                                 </div>
                                             </div>
                                         </div>

@@ -5,11 +5,16 @@ import {StorageImage} from "@aws-amplify/ui-react-storage";
 import PdfViewer from "../../pages/common/PdfViewer";
 import DialogModal from "../../pages/common/DialogModal";
 import {getUrl} from "aws-amplify/storage";
+import {useEmployerStore} from "../../stores/useStore.ts";
+import {useStore} from "zustand/react";
+import {candidateService} from "../../api/CandidateService.ts";
 
 export default function Recommend() {
     const [nurses, setNurses] = useState<Nurse[]>([]);
     const previewPdfRef = useRef(null)
     const [pdfDownloadLink, setPdfDownloadLink] = useState('')
+    const employer = useStore(useEmployerStore, state => state.employer)
+    const addCandidate = useStore(useEmployerStore, state => state.addCandidate)
 
     async function previewPdf(url: string) {
         const link = await genPdfViewer(url)
@@ -36,8 +41,10 @@ export default function Recommend() {
     }, []);
     const isFavor = false;
 
-    function favor(id: string | undefined) {
-        console.log(id)
+    async function favor(nurseId: string | undefined) {
+        if (!nurseId) return;
+        const candidate = await candidateService.add(employer.id, nurseId);
+        if (candidate) addCandidate(candidate)
     }
 
     return (
@@ -54,7 +61,8 @@ export default function Recommend() {
                         <div className="flex flex-row max-w-full justify-between mx-3 my-1">
                             <div className="flex flex-row">
                                 <p className="flex text-lg font-bold w-fit">{n.name}</p>
-                                <img onClick={() => favor(n.id)} src={isFavor ? '/common/icon_favor.png' : '/common/icon_no_favor.png'} alt=""
+                                <img onClick={() => favor(n.id)} src={isFavor ? '/common/icon_favor.png' : '/common/icon_no_favor.png'}
+                                     alt=""
                                      width={27} height={20} className="ml-3 hover:cursor-pointer"/>
                             </div>
                             <p className="text-secondary text-sm font-bold pt-1">{n.rank}</p>

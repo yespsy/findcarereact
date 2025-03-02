@@ -44,3 +44,4 @@ export interface Candidate {
 
 export type EmployerDO = Schema['Employer']['type'];
 export type JobDO = Schema['Job']['type'];
+export type CandidateDO = Schema['Candidate']['type'];

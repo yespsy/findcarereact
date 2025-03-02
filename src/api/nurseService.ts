@@ -1,10 +1,9 @@
 import {generateClient} from 'aws-amplify/data';
 import {type Schema} from '../../amplify/data/resource'
 import {Nurse} from "../entity";
-const client = generateClient<Schema>();
-
 import {Amplify} from "aws-amplify";
 import outputs from '../../amplify_outputs.json';
+const client = generateClient<Schema>();
 Amplify.configure(outputs);
 
 const nurseService = {
@@ -14,6 +13,15 @@ const nurseService = {
             selectionSet: ['id', 'name', 'rank', 'status', 'experience', 'avatarPath', 'resumeContent', 'resumePdfPath']
         });
         return list.data
+    },
+    getNursesById: async (id: string) => {
+        const {errors, data} = await client.models.Nurse.get({
+            id
+        });
+        if (errors) {
+            alert(JSON.stringify(errors))
+        }
+        return data
     },
     add: async (nurse: Nurse) => {
         const {errors, data} = await client.models.Nurse.create({

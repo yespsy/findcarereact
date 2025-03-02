@@ -110,5 +110,5 @@ export const employerService = {
             candidates: undefined
         }
         return ret
-    },
+    }
 }

@@ -1,7 +1,6 @@
 import JobDetail from "./JobDetail";
 import Candidate from "./Candidate";
 import Recommend from "./Recommend.tsx";
-import CurrentUser from "./CurrentUser.tsx";
 import {useEmployerStore} from "../../stores/useStore.ts";
 import {useStore} from "zustand/react";
 
@@ -14,10 +13,10 @@ export default function Dashboard() {
                     <div className="flex flex-col md:basis-full lg:basis-11/12 xl:basis-10/12 2xl:basis-9/12">
                         <div className="float-left"></div>
                         <div className="font-bold text-3xl py-6 text-primary">
-                            {employer.phone}，您好!<CurrentUser></CurrentUser>
+                            {employer.phone}，您好!
                         </div>
                         <div>
-                            <JobDetail employer={employer}></JobDetail>
+                            <JobDetail></JobDetail>
                         </div>
                         <div className="flex justify-around mt-2">
                             <div className="flex flex-col w-full  pr-3">

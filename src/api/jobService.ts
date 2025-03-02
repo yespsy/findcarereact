@@ -32,4 +32,15 @@ export const jobService = {
         }
         return null;
     },
+    updateRequirements: async (id: string, requirements: string, extraRequirements: string) => {
+        const {errors, data: e} = await client.models.Job.update({id, requirements, extraRequirements}, {authMode: 'userPool'});
+        if (errors) {
+            handleError(errors)
+            return null
+        }
+        if (!e) {
+            return false;
+        }
+        return true
+    }
 }

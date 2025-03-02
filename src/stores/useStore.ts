@@ -9,6 +9,7 @@ type EmployerStoreActions = {
     setJob: (job: Job) => void,
     addCandidate: (candidate: Candidate) => void,
     clear: () => void
+    updateRequirements: (requirements: string, extraRequirements: string) => void
 }
 
 type EmployerStore = EmployerStoreState & EmployerStoreActions
@@ -43,6 +44,23 @@ export const useEmployerStore = createStore<EmployerStore>()(
                     }
                 })
             },
+            updateRequirements: (requirements, extraRequirements) => {
+                set(state => {
+                    if (!state.employer.job) {
+                        return {employer: state.employer}
+                    }
+                    return {
+                        employer: {
+                            ...state.employer,
+                            job: {
+                                ...state.employer.job,
+                                requirements: requirements,
+                                extraRequirements: extraRequirements
+                           }
+                        }
+                    }
+                })
+            }
         }),
         {name: 'employer-storage'},
     ),

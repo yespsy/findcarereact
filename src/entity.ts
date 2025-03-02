@@ -1,3 +1,5 @@
+import {Schema} from "../amplify/data/resource.ts";
+
 export interface Nurse {
     id?: string;
     name: string,
@@ -40,3 +42,5 @@ export interface Candidate {
     isAlreadyInterviewed: boolean
 }
 
+export type EmployerDO = Schema['Employer']['type'];
+export type JobDO = Schema['Job']['type'];

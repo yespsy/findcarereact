@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 export default function Logout() {
     const [isLogin, setIsLogin] = useState(false)
     const navigate = useNavigate();
-
+    //TODO update state after logout
     useEffect(() => {
         isUserLogin().then(isLogin => {
             setIsLogin(isLogin)

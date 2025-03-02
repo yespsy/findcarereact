@@ -1,24 +1,29 @@
 import {type Schema} from '../../amplify/data/resource'
 import {generateClient} from 'aws-amplify/data';
-import {Amplify} from "aws-amplify";
 import outputs from '../../amplify_outputs.json';
-// import {Employer} from "../entity.ts";
+import {handleError} from "./utils.ts";
+import {jobService} from "./jobService.ts";
 
+import {Amplify} from "aws-amplify";
 const client = generateClient<Schema>();
-
 Amplify.configure(outputs);
-// type Employer = Schema['Employer']['type'];
+
 export const employerService = {
     getCurrentEmployer: async (id: string) => {
         const {data: e, errors} = await client.models.Employer.list({
             filter: {phone: {eq: id}},
             authMode: 'userPool',
         });
+        //TODO e is array, and should only one item
+        console.dir(e);
         if (errors) {
             // alert(JSON.stringify(errors))
             console.dir(errors)
         }
-        return e;
+        if (e && e.length === 0) {
+            return e[0];
+        }
+        return null;
     },
     getEmployers: async () => {
         const {data: e, errors} = await client.models.Employer.list({authMode: 'userPool'});
@@ -33,7 +38,17 @@ export const employerService = {
             {phone, name: phone, coin: 0}, {authMode: 'userPool',}
         )
         if (errors) {
+            handleError(errors)
+            return null
+        }
+        if (!newEmployer || !newEmployer.id) {
+            return null;
+        }
+        const job = await jobService.create(newEmployer.id)
+        if (errors) {
             console.dir(errors)
+            return null
+        } else if (!job) {
             return null
         } else {
             return newEmployer

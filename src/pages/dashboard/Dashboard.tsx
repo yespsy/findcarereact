@@ -1,45 +1,11 @@
 import JobDetail from "./JobDetail";
 import Candidate from "./Candidate";
-import {employerService} from "../../api/employerService";
 import Recommend from "./Recommend.tsx";
 import CurrentUser from "./CurrentUser.tsx";
 import {useEmployerStore} from "../../stores/useStore.ts";
-import { useEffect } from "react";
-import { getCurrentUser } from "aws-amplify/auth";
-import {Employer} from "../../entity.ts";
 
 export default function Dashboard() {
     const employer = useEmployerStore((state)=> state.employer)
-
-    const setEmployer = useEmployerStore((state)=> state.setEmployer)
-    useEffect(() => {
-        async function get() {
-            try {
-                const {username, signInDetails} = await getCurrentUser();
-                console.log(`username: ${username} loginId: ${signInDetails?.loginId}`);
-                setEmployer({
-                    phone: username,
-                    name: username,
-                    coin: 0
-                })
-                const employer = await employerService.getCurrentEmployer(username)
-                console.dir(employer);
-                const setOne:Employer = {
-                    phone: username,
-                    name: username,
-                    coin: 0
-                }
-                if(employer?.job){
-                    //setOne.job = employer.job
-                }
-                setEmployer(setOne)
-            } catch (e) {
-                console.log(e)
-            }
-        }
-        get().then();
-    }, []);
-
 
     return (
         <>

@@ -1,6 +1,10 @@
 import {useRef, useState} from 'react'
 import {autoSignIn, confirmSignIn, confirmSignUp, signIn, signUp} from 'aws-amplify/auth'
 import {Link, useNavigate} from 'react-router-dom';
+import {employerService} from "../../api/employerService.ts";
+import {handleErrorWithMessage} from "../../api/utils.ts";
+import {useEmployerStore} from "../../stores/useStore.ts";
+import {EmployerDO} from "../../entity.ts";
 
 interface LoginInfoProps {
     type?: string
@@ -19,7 +23,7 @@ export default function LoginInfo({type}: LoginInfoProps) {
     const [isShowVerificationError, setIsShowVerificationError] = useState(false)
     const [isAgree, setIsAgree] = useState(false)
     const refModal = useRef(null);
-
+    const setEmployer = useEmployerStore((state) => state.setEmployer)
     const title = (authType === AuthType.login ? '登陸' : '註冊');
 
     function checkPhoneNumber() {
@@ -124,13 +128,19 @@ export default function LoginInfo({type}: LoginInfoProps) {
             confirmationCode: verificationCode,
         });
         if (confirmSignUpNextStep.signUpStep === 'COMPLETE_AUTO_SIGN_IN') {
-            const { nextStep } = await autoSignIn();
+            const {nextStep} = await autoSignIn();
             if (nextStep.signInStep === 'DONE') {
-                //TODO 注册成功，创建雇主对象
+                //注册成功，创建雇主实体
+                const employer = await employerService.signupInit("+852" + number)
+                if (!employer) {
+                    handleErrorWithMessage(null, "注册失败,请联系管理员。" + signUpStepTwo);
+                    return;
+                }
+                setEmployerState(employer)
                 alert('注册成功！');
                 navigate('/dashboard')
             }
-        }else if (confirmSignUpNextStep.signUpStep === 'DONE') {
+        } else if (confirmSignUpNextStep.signUpStep === 'DONE') {
             navigate('/login')
         } else {
             alert('出錯了！')
@@ -169,6 +179,10 @@ export default function LoginInfo({type}: LoginInfoProps) {
         }
     }
 
+    function setEmployerState(employer: EmployerDO) {
+        //TODO add job state
+        setEmployer({id: employer.id!, name: employer.name!, phone: employer.phone!, coin: employer.coin!})
+    }
 
     function agree(v: boolean) {
         setIsAgree(v)

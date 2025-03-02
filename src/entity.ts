@@ -1,7 +1,7 @@
 import {Schema} from "../amplify/data/resource.ts";
 
 export interface Nurse {
-    id?: string;
+    id: string;
     name: string,
     rank: string,
     status: string,
@@ -12,7 +12,7 @@ export interface Nurse {
 }
 
 export interface Employer {
-    id?: string;
+    id: string;
     name: string,
     phone: string,
     coin: number,
@@ -21,8 +21,8 @@ export interface Employer {
 }
 
 export interface Job {
-    id?: string,
-    employerId?: string,
+    id: string,
+    employerId: string,
     title: string,
     nurseRank: string,
     salary: string,
@@ -33,7 +33,7 @@ export interface Job {
 }
 
 export interface Candidate {
-    id?: string;
+    id: string;
     nurse?: Nurse,
     status: string,
     interviewDate: string,

@@ -3,8 +3,9 @@ import {autoSignIn, confirmSignIn, confirmSignUp, signIn, signUp} from 'aws-ampl
 import {Link, useNavigate} from 'react-router-dom';
 import {employerService} from "../../api/employerService.ts";
 import {handleErrorWithMessage} from "../../api/utils.ts";
-import {useEmployerStore} from "../../stores/useStore.ts";
-import {EmployerDO} from "../../entity.ts";
+import {useEmployerStore, useJobStore} from "../../stores/useStore.ts";
+import {Employer, Job} from "../../entity.ts";
+import {jobService} from "../../api/jobService.ts";
 
 interface LoginInfoProps {
     type?: string
@@ -24,6 +25,7 @@ export default function LoginInfo({type}: LoginInfoProps) {
     const [isAgree, setIsAgree] = useState(false)
     const refModal = useRef(null);
     const setEmployer = useEmployerStore((state) => state.setEmployer)
+    const setJob = useJobStore((state) => state.setJob);
     const title = (authType === AuthType.login ? '登陸' : '註冊');
 
     function checkPhoneNumber() {
@@ -133,10 +135,15 @@ export default function LoginInfo({type}: LoginInfoProps) {
                 //注册成功，创建雇主实体
                 const employer = await employerService.signupInit("+852" + number)
                 if (!employer) {
-                    handleErrorWithMessage(null, "注册失败,请联系管理员。" + signUpStepTwo);
+                    handleErrorWithMessage(null, "注册失败,请联系管理员。signUpStepTwo");
                     return;
                 }
-                setEmployerState(employer)
+                const job = await jobService.create(employer.id!)
+                if (!job) {
+                    handleErrorWithMessage(null, "注册失败,请联系管理员。signUpStepTwo");
+                    return
+                }
+                setEmployerState(employer, job)
                 alert('注册成功！');
                 navigate('/dashboard')
             }
@@ -172,6 +179,15 @@ export default function LoginInfo({type}: LoginInfoProps) {
             challengeResponse: verificationCode,
         });
         if (confirmSignInNextStep.signInStep === 'DONE') {
+            //登陸成功，创建雇主实体
+            const employer = await employerService.getCurrentEmployer("+852" + number)
+            if (!employer) {
+                handleErrorWithMessage(null, "登陸失败,请联系管理员。signUpStepTwo");
+                return;
+            }
+            setEmployerState(employer, employer.job)
+            alert('注册成功！');
+            navigate('/dashboard')
             navigate('/dashboard')
         } else {
             alert('出錯了！')
@@ -179,9 +195,11 @@ export default function LoginInfo({type}: LoginInfoProps) {
         }
     }
 
-    function setEmployerState(employer: EmployerDO) {
-        //TODO add job state
-        setEmployer({id: employer.id!, name: employer.name!, phone: employer.phone!, coin: employer.coin!})
+    function setEmployerState(employer: Employer, job?: Job) {
+        setEmployer(employer)
+        if (job) {
+            setJob(job)
+        }
     }
 
     function agree(v: boolean) {

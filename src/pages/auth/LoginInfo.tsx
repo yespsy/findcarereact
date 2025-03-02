@@ -3,8 +3,7 @@ import {autoSignIn, confirmSignIn, confirmSignUp, signIn, signUp} from 'aws-ampl
 import {Link, useNavigate} from 'react-router-dom';
 import {employerService} from "../../api/employerService.ts";
 import {handleErrorWithMessage} from "../../api/utils.ts";
-import {useEmployerStore, useJobStore} from "../../stores/useStore.ts";
-import {Employer, Job} from "../../entity.ts";
+import {useEmployerStore} from "../../stores/useStore.ts";
 import {jobService} from "../../api/jobService.ts";
 
 interface LoginInfoProps {
@@ -24,8 +23,8 @@ export default function LoginInfo({type}: LoginInfoProps) {
     const [isShowVerificationError, setIsShowVerificationError] = useState(false)
     const [isAgree, setIsAgree] = useState(false)
     const refModal = useRef(null);
-    const setEmployer = useEmployerStore((state) => state.setEmployer)
-    const setJob = useJobStore((state) => state.setJob);
+    const setEmployer = useEmployerStore.getState().setEmployer
+
     const title = (authType === AuthType.login ? '登陸' : '註冊');
 
     function checkPhoneNumber() {
@@ -143,7 +142,8 @@ export default function LoginInfo({type}: LoginInfoProps) {
                     handleErrorWithMessage(null, "注册失败,请联系管理员。signUpStepTwo");
                     return
                 }
-                setEmployerState(employer, job)
+                setEmployer(employer)
+                useEmployerStore.getState().setJob(job)
                 alert('注册成功！');
                 navigate('/dashboard')
             }
@@ -185,20 +185,13 @@ export default function LoginInfo({type}: LoginInfoProps) {
                 handleErrorWithMessage(null, "登陸失败,请联系管理员。signUpStepTwo");
                 return;
             }
-            setEmployerState(employer, employer.job)
+            setEmployer(employer)
             alert('注册成功！');
             navigate('/dashboard')
             navigate('/dashboard')
         } else {
             alert('出錯了！')
             console.log('Error. confirmSignInNextStep.signInStep: ' + confirmSignInNextStep.signInStep)
-        }
-    }
-
-    function setEmployerState(employer: Employer, job?: Job) {
-        setEmployer(employer)
-        if (job) {
-            setJob(job)
         }
     }
 

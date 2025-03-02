@@ -2,20 +2,21 @@ import {getCurrentUser} from 'aws-amplify/auth';
 import {useEffect, useState} from 'react';
 
 export default function CurrentUser() {
-    const [loginName, setLoginName] = useState('')
+    const [msg, setMsg] = useState('')
     useEffect(() => {
         async function get() {
             try {
-                const {username, userId, signInDetails} = await getCurrentUser();
+                const {username, signInDetails} = await getCurrentUser();
 
-                console.log("username", username);
-                console.log("user id", userId);
-                console.log("sign-in details", signInDetails);
+                // console.log("username", username);
+                // console.log("user id", userId);
+                // console.log("sign-in details", signInDetails);
+                // console.dir(signInDetails);
 
-                setLoginName(username)
+                setMsg(username + '   ' + signInDetails?.loginId)
             } catch (e) {
                 console.log(e)
-                setLoginName('Not Login');
+                setMsg('Not Login');
             }
         }
 
@@ -24,7 +25,7 @@ export default function CurrentUser() {
 
     return (
         <>
-            {loginName}
+            {msg}
         </>
     );
 }

@@ -1,45 +1,32 @@
-import {create} from 'zustand'
+import { createStore } from 'zustand/vanilla'
+import { persist } from 'zustand/middleware'
 import {Employer, Job} from "../entity.ts";
 
-//TODO 保守狀態於localStorage，避免頁面刷新後資料消失
+type EmployerStoreState = { employer: Employer, }
 
-interface EmployerState {
-    employer: Employer,
+type EmployerStoreActions = {
     setEmployer: (employer: Employer) => void,
     setJob: (job: Job) => void,
+    clear: ()=>void
 }
 
-export const useEmployerStore = create<EmployerState>()((set) => ({
-    employer: {
-        name: '', phone: 'unAuthorization', coin: 0, id: ''
-    },
-    setEmployer: (employer: Employer) => set(() => ({employer: employer})),
-    setJob: (job) => {
-        set(state => ({
-            employer: {
-                ...state.employer,
-                job: job
-            }
-        }))
-    }
-}))
+type EmployerStore = EmployerStoreState & EmployerStoreActions
 
-interface JobState {
-    job: Job,
-    setJob: (job: Job) => void,
-}
-
-export const useJobStore = create<JobState>()((set) => ({
-    job: {
-        title: '',
-        nurseRank: '',
-        salary: '',
-        location: '',
-        onboardDate: '',
-        requirements: '',
-        extraRequirements: '',
-        id: '',
-        employerId: ''
-    },
-    setJob: (job: Job) => set(() => ({job: job})),
-}))
+export const useEmployerStore = createStore<EmployerStore>()(
+    persist(
+        (set) => ({
+            employer: {name: '', phone: 'unAuthorization', coin: 0, id: ''},
+            setEmployer: (nextEmployer: Employer) => set(() => ({employer: nextEmployer})),
+            setJob: (job) => {
+                set(state => ({
+                    employer: {
+                        ...state.employer,
+                        job: job
+                    }
+                }))
+            },
+            clear: ()=>set(()=>({employer:{name: '', phone: 'clear', coin: 0, id: ''}}))
+        }),
+        { name: 'employer-storage' },
+    ),
+)

@@ -3,10 +3,10 @@ import Candidate from "./Candidate";
 import Recommend from "./Recommend.tsx";
 import CurrentUser from "./CurrentUser.tsx";
 import {useEmployerStore} from "../../stores/useStore.ts";
+import {useStore} from "zustand/react";
 
 export default function Dashboard() {
-    const employer = useEmployerStore((state)=> state.employer)
-
+    const employer = useStore(useEmployerStore, state => state.employer)
     return (
         <>
             <div className="bg-base-100">

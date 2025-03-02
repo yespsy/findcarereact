@@ -44,12 +44,10 @@ export const employerService = {
             selectionSet: selectionSetOfEmployer,
             authMode: 'userPool',
         });
-        //TODO e is array, and should only one item
-        console.dir(e);
         if (errors) {
             console.dir(errors)
         }
-        if (e && e.length === 0) {
+        if (e && e.length === 1) {
             return convertToEntity(e[0])
         }
         return null;

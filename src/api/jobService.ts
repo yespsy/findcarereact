@@ -38,9 +38,6 @@ export const jobService = {
             handleError(errors)
             return null
         }
-        if (!e) {
-            return false;
-        }
-        return true
+        return e;
     }
 }

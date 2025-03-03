@@ -164,6 +164,7 @@ export default function ListNurse() {
 
     const [form] = Form.useForm();
     async function modify(n: Nurse) {
+        setId(n.id)
         form.setFieldsValue(n)
         setAvatarPath(n.avatarPath);
         setAvatarImage(undefined);

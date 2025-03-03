@@ -6,6 +6,7 @@ import {StorageImage} from '@aws-amplify/ui-react-storage';
 import '@aws-amplify/ui-react/styles.css';
 import PdfViewer from "../../common/PdfViewer.tsx";
 import DialogModal from "../../common/DialogModal";
+import { Space, Table, Form, FormProps,TableProps,Button, Input  } from 'antd';
 
 export default function ListNurse() {
     const previewPdfRef = useRef(null)
@@ -17,20 +18,16 @@ export default function ListNurse() {
     const [pdfDownloadUrl, setPdfDownloadUrl] = useState('')
     const [uploadPdfMsg, setUploadPdfMsg] = useState('')
     const [nurses, setNurses] = useState<Nurse[]>([])
-    const [name, setName] = useState<string>('')
-    const [rank, setRank] = useState<string>('')
-    const [status_, setStatus_] = useState<string>('')
-    const [experience, setExperience] = useState<string>('')
+    // const [name, setName] = useState<string>('')
+    // const [rank, setRank] = useState<string>('')
+    // const [status_, setStatus_] = useState<string>('')
+    // const [experience, setExperience] = useState<string>('')
     const [avatarPath, setAvatarPath] = useState<string>('')
     const [id, setId] = useState<string>('')
-    const style = "ml-1 mr-3 mt-2 bg-green-200"
-
-    const newNurse: Nurse = {
-        name, rank, status: status_, experience, avatarPath: "", resumeContent: "", resumePdfPath: "", id: ""
-    }
 
     async function addNurse() {
-        const newOne = await service().nurseService.add(newNurse);
+        const vs = form.getFieldsValue();
+        const newOne = await service().nurseService.add(vs);
         // @ts-expect-error ignore
         setId(newOne.id);
         reload().then()
@@ -49,7 +46,6 @@ export default function ListNurse() {
     async function deleteNurse(n: Nurse) {
         if (!n.id) return;
         await service().nurseService.delete(n.id);
-        //TODO deny
         try {
             await remove({path: n.avatarPath})
         } catch (error) {
@@ -154,10 +150,6 @@ export default function ListNurse() {
 
     function clear() {
         setId('');
-        setName('');
-        setRank('');
-        setStatus_('');
-        setExperience('');
         setAvatarPath('');
         setAvatarImage(undefined);
         setUploadPdfMsg('');
@@ -167,14 +159,12 @@ export default function ListNurse() {
         selectAvatarFileRef.current.value = "";
         // @ts-expect-error skip
         selectPdfFileRef.current.value = '';
+        form.resetFields();
     }
 
+    const [form] = Form.useForm();
     async function modify(n: Nurse) {
-        setId(n.id ? n.id : '');
-        setName(n.name);
-        setRank(n.rank);
-        setStatus_(n.status);
-        setExperience(n.experience);
+        form.setFieldsValue(n)
         setAvatarPath(n.avatarPath);
         setAvatarImage(undefined);
         setUploadPdfMsg('');
@@ -184,39 +174,106 @@ export default function ListNurse() {
     }
 
     async function updateNurse() {
-        const updateNurse = {...newNurse} as Nurse;
-        updateNurse.avatarPath = avatarPath
-        updateNurse.resumePdfPath = pdfPath
-        console.dir(updateNurse);
-        await service().nurseService.update(updateNurse);
+        // const updateNurse = {...newNurse} as Nurse;
+        // updateNurse.avatarPath = avatarPath
+        // updateNurse.resumePdfPath = pdfPath
+        // console.dir(updateNurse);
+        const update = form.getFieldsValue();
+        await service().nurseService.update(update);
         await reload().then()
     }
+
+    const columns: TableProps<Nurse>['columns'] = [
+        {
+            title: 'ID',
+            dataIndex: 'id',
+            key: 'id',
+            render: (text) => <a>{text}</a>,
+        },
+        {
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name',
+            render: (text) => <a>{text}</a>,
+        },
+        {
+            title: 'Rank',
+            dataIndex: 'rank',
+            key: 'rank',
+            render: (text) => <a>{text}</a>,
+        },
+        {
+            title: 'Status',
+            dataIndex: 'status',
+            key: 'status',
+            render: (text) => <a>{text}</a>,
+        },
+        {
+            title: 'Experience',
+            dataIndex: 'experience',
+            key: 'experience',
+            render: (text) => <a>{text}</a>,
+        },
+        {
+            title: 'AvatarPath',
+            dataIndex: 'avatarPath',
+            key: 'avatarPath',
+            render: (text) => <a>{text}</a>,
+        },
+        {
+            title: 'Resume Pdf Path',
+            dataIndex: 'resumePdfPath',
+            key: 'resumePdfPath',
+            render: (text) => <a>{text}</a>,
+        },
+        {
+            title: 'Action',
+            key: 'action',
+            render: (_, record) => (
+                <Space size="middle">
+                    <Button onClick={() => deleteNurse(record)} className="bg-base-100">Del</Button>
+                    <Button onClick={()=>modify(record)} className="bg-base-100">Modify</Button>
+                </Space>
+            ),
+        },
+    ]
+
+    const onFinish: FormProps<Nurse>['onFinish'] = (values) => {
+        console.log('Success:', values);
+    };
+
+    const onFinishFailed: FormProps<Nurse>['onFinishFailed'] = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
 
     return (
         <>
             <div className="flex justify-center">
-                <div className="flex">
-                    <form>
-                        <div>--- 1 ---</div>
-                        <div>ID: {id}</div>
-                        <div>Name:<input value={name} className={style} onChange={(e) => setName(e.target.value)}/>
-                        </div>
-                        <div>Rank:<input value={rank} className={style} onChange={(e) => setRank(e.target.value)}/>
-                        </div>
-                        <div>Status:<input value={status_} className={style}
-                                           onChange={(e) => setStatus_(e.target.value)}/></div>
-                        <div>Exp:<input value={experience} className={style}
-                                        onChange={(e) => setExperience(e.target.value)}/></div>
-                        <button type="button" onClick={() => addNurse()}
-                                className="btn btn-sm my-2 bg-primary text-white">Add
-                        </button>
-                        <button type="button" onClick={() => updateNurse()}
-                                className="btn btn-sm my-2 ml-2 bg-primary text-white">update
-                        </button>
-                        <button type="button" onClick={() => clear()}
-                                className="btn btn-sm my-2 bg-primary text-white ml-5">Clear
-                        </button>
-                    </form>
+                <div className="flex justify-items-center">
+                    <Form name="basic" labelCol={{ span: 8 }} style={{ maxWidth: 300 }} initialValues={{ remember: true }}
+                          form={form} onFinish={onFinish} onFinishFailed={onFinishFailed} size='small' autoComplete="off">
+                        <div>----------------------- 1 ---------------------</div>
+                        <Form.Item<Nurse> label="ID" name="id">
+                            <Input disabled />
+                        </Form.Item>
+                        <Form.Item<Nurse> label="Name" name="name">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item<Nurse> label="Rank" name="rank">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item<Nurse> label="Status" name="status">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item<Nurse> label="Exp" name="experience">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label={null}>
+                            <Button className="bg-base-100" onClick={()=>addNurse()}>add</Button>
+                            <Button className="bg-base-100 ml-3" onClick={()=>updateNurse()}>update</Button>
+                            <Button className="bg-base-100 ml-3" onClick={()=>clear()}>clear</Button>
+                        </Form.Item>
+                    </Form>
                 </div>
                 <div className="divider divider-horizontal"></div>
                 <div className="w-25 h-30">
@@ -258,46 +315,8 @@ export default function ListNurse() {
                 </div>
             </div>
 
-            <div className="flex justify-center mt-10">
-                <table className="table w-fit">
-                    <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>name</th>
-                        <th>rank</th>
-                        <th>status</th>
-                        <th>experience</th>
-                        <th>avatarPath</th>
-                        <th>resumePdfPath</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        nurses.map((n: Nurse) => {
-                            return (
-                                <tr key={n.id}>
-                                    <td>{n.id}</td>
-                                    <td>{n.name}</td>
-                                    <td>{n.rank}</td>
-                                    <td>{n.status}</td>
-                                    <td>{n.experience}</td>
-                                    <td className="truncate max-w-30">{n.avatarPath}</td>
-                                    <td className="truncate max-w-30">{n.resumePdfPath}</td>
-                                    <td>
-                                        <button className="bg-secondary px-5 py-0.5 rounded-lg"
-                                                onClick={() => deleteNurse(n)}>Del
-                                        </button>
-                                        <button className="bg-secondary px-3 py-0.5 rounded-lg ml-3"
-                                                onClick={() => modify(n)}>Modify
-                                        </button>
-                                    </td>
-                                </tr>
-                            )
-                        })
-                    }
-                    </tbody>
-                </table>
+            <div className="flex justify-center mt-5">
+                <Table<Nurse> columns={columns} dataSource={nurses} />
             </div>
         </>
     );

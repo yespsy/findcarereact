@@ -2,6 +2,7 @@ import {useStore} from "zustand/react";
 import {employerService} from "../../api/employerService.ts";
 import {useEmployerStore} from "../../stores/useStore.ts";
 import CurrentUser from "../dashboard/CurrentUser.tsx";
+import { Button, Popover } from 'antd';
 
 export default function DevPlay() {
     const employer = useStore(useEmployerStore, state => state.employer)
@@ -42,6 +43,13 @@ export default function DevPlay() {
         useEmployerStore.getState().clear();
     }
 
+    const content = (
+        <div>
+            <p>Content</p>
+            <p>Content</p>
+        </div>
+    );
+
     return (
         <div className="justify-items-center">
             <CurrentUser></CurrentUser>
@@ -58,6 +66,10 @@ export default function DevPlay() {
             <div className="flex ">
                 Store Employer:
             </div>
+
+            <Popover content={content} title="Title">
+                <Button type="primary">Hover me</Button>
+            </Popover>
         </div>
     )
 }

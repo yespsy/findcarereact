@@ -38,8 +38,10 @@ export default function NurseCarousel() {
         <>
             <div className="flex flex-row justify-between pt-8 mr-4">
                 {nurses.map((n) => (
-                    <div key={n.id} className="max-w-full w-[220px] h-[280px] border-2 shadow-lg rounded-2xl mr-2">
-                        <StorageImage alt="findcare" path={n.avatarPath} width={220} height={165} onGetUrlError={(e) => console.dir(e)}/>
+                    <div key={n.id} className="max-w-full w-[220px] h-[280px] border-2 shadow-lg rounded-2xl mr-2 bg-white">
+                        <div className="flex justify-around p-0.5">
+                            <StorageImage alt="findcare" path={n.avatarPath} onGetUrlError={(e) => console.dir(e)}/>
+                        </div>
                         <div className="flex flex-row max-w-full justify-between mx-3 my-1">
                             <p className="text-lg font-bold">{n.name}</p>
                             <p className="text-secondary text-sm font-bold pt-1">{n.rank}</p>

@@ -19,7 +19,7 @@ export default function Comments() {
 
     function commentTd(c: { name: string; data: string; rank: number; title: string; content: string }) {
         return (
-            <div className="bg-base-100 rounded-2xl shadow-lg shadow-gray-400 p-5 mt-7">
+            <div className="bg-base-100 rounded-2xl shadow-lg shadow-gray-400 p-5 pl-6 pb-6 mt-4">
                 <p className="w-[300px] text-2xl font-bold text-nowrap text-ellipsis overflow-hidden ...">{c.title}&nbsp;</p>
                 <div className="flex justify-between pt-1">
                     <div>
@@ -43,30 +43,30 @@ export default function Comments() {
                         <p className="ml-2">{c.name}</p>
                     </div>
                 </div>
-                <p className="pt-2 text-gray-400 h-[75px] text-ellipsis overflow-hidden ...">{c.content}</p>
+                <p className="pt-1 text-gray-400 h-[70px] text-ellipsis overflow-hidden ...">{c.content}</p>
             </div>
         )
     }
 
     return (
-        <div className="pt-5 mt-8 pb-1 bg-white rounded-xl mr-6 flex justify-around">
-            <table className="table-auto w-auto mb-8 mx-4">
-                <tbody>
+        <div className="pt-5 mt-5 pb-1 bg-white rounded-xl mr-8 flex justify-around">
+            <table className="table-auto w-auto mb-4 ml-5 mr-4">
+                <tbody className="">
                 <tr>
                     <td colSpan={2}>
                         <div className="flex justify-between">
-                            <p className="text-2xl font-bold">僱主評價</p>
-                            <Link to="/" className="mr-10 text-xl font-bold text-secondary underline-offset-8 underline">查看更多</Link>
+                            <p className="text-3xl font-bold ml-2">僱主評價</p>
+                            <Link to="/" className="text-xl font-bold text-secondary underline-offset-8 underline">查看更多</Link>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td className="w-[350px]">{commentTd(comments[0])}</td>
-                    <td className="w-[350px] pl-4">{commentTd(comments[1])}</td>
+                    <td className="w-[310px]">{commentTd(comments[0])}</td>
+                    <td className="w-[310px] pl-5">{commentTd(comments[1])}</td>
                 </tr>
                 <tr>
                     <td>{commentTd(comments[2])}</td>
-                    <td className="w-[350px] pl-4">{commentTd(comments[3])}</td>
+                    <td className="w-[330px] pl-5">{commentTd(comments[3])}</td>
                 </tr>
                 </tbody>
             </table>

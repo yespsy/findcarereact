@@ -233,7 +233,7 @@ export default function LoginInfo({type}: LoginInfoProps) {
             </div>
             <div className="flex flex-col w-[487px] justify-center mt-36">
                 <div className="flex justify-center">
-                    <input type="checkbox" className="checkbox checked:checkbox-primary" checked={isAgree}
+                    <input type="checkbox" className="checkbox checkbox-primary [--chkfg:white] " checked={isAgree}
                            onChange={() => setIsAgree(!isAgree)}/>
                     <p className="text-nowrap text-base ml-3 text-gray-400">已閱讀並同意搜護綱</p>
                     <p className="text-primary text-nowrap text-base">《用戶協議》《隱私政策》</p>

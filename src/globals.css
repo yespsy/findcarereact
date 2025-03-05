@@ -28,3 +28,7 @@ body {
 .color-blue {
   color: #1786F9;
 }
+
+.timeline hr {
+  background-color: #EE46BC;
+}

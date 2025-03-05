@@ -1,12 +1,11 @@
-import {Nurse} from "../../../entity";
+import { Nurse } from "../../../entity";
 import service from "../../../api/service";
-import {useEffect, useRef, useState} from "react";
-import {getUrl, remove, uploadData} from 'aws-amplify/storage';
-import {StorageImage} from '@aws-amplify/ui-react-storage';
-import '@aws-amplify/ui-react/styles.css';
+import { useEffect, useRef, useState } from "react";
+import { getUrl, remove, uploadData } from 'aws-amplify/storage';
+import { StorageImage } from '@aws-amplify/ui-react-storage';
 import PdfViewer from "../../common/PdfViewer.tsx";
 import DialogModal from "../../common/DialogModal";
-import { Space, Table, Form, FormProps,TableProps,Button, Input  } from 'antd';
+import { Space, Table, Form, FormProps, TableProps, Button, Input } from 'antd';
 
 export default function ListNurse() {
     const previewPdfRef = useRef(null)
@@ -47,13 +46,13 @@ export default function ListNurse() {
         if (!n.id) return;
         await service().nurseService.delete(n.id);
         try {
-            await remove({path: n.avatarPath})
+            await remove({ path: n.avatarPath })
         } catch (error) {
             console.log('Error ', error);
             alert(JSON.stringify(error))
         }
         try {
-            await remove({path: n.resumePdfPath})
+            await remove({ path: n.resumePdfPath })
         } catch (error) {
             console.log('Error ', error);
             alert(JSON.stringify(error))
@@ -233,7 +232,7 @@ export default function ListNurse() {
             render: (_, record) => (
                 <Space size="middle">
                     <Button onClick={() => deleteNurse(record)} className="bg-base-100">Del</Button>
-                    <Button onClick={()=>modify(record)} className="bg-base-100">Modify</Button>
+                    <Button onClick={() => modify(record)} className="bg-base-100">Modify</Button>
                 </Space>
             ),
         },
@@ -252,7 +251,7 @@ export default function ListNurse() {
             <div className="flex justify-center">
                 <div className="flex justify-items-center">
                     <Form name="basic" labelCol={{ span: 8 }} style={{ maxWidth: 300 }} initialValues={{ remember: true }}
-                          form={form} onFinish={onFinish} onFinishFailed={onFinishFailed} size='small' autoComplete="off">
+                        form={form} onFinish={onFinish} onFinishFailed={onFinishFailed} size='small' autoComplete="off">
                         <div>----------------------- 1 ---------------------</div>
                         <Form.Item<Nurse> label="ID" name="id">
                             <Input disabled />
@@ -270,9 +269,9 @@ export default function ListNurse() {
                             <Input />
                         </Form.Item>
                         <Form.Item label={null}>
-                            <Button className="bg-base-100" onClick={()=>addNurse()}>add</Button>
-                            <Button className="bg-base-100 ml-3" onClick={()=>updateNurse()}>update</Button>
-                            <Button className="bg-base-100 ml-3" onClick={()=>clear()}>clear</Button>
+                            <Button className="bg-base-100" onClick={() => addNurse()}>add</Button>
+                            <Button className="bg-base-100 ml-3" onClick={() => updateNurse()}>update</Button>
+                            <Button className="bg-base-100 ml-3" onClick={() => clear()}>clear</Button>
                         </Form.Item>
                     </Form>
                 </div>
@@ -283,12 +282,12 @@ export default function ListNurse() {
                     {
                         avatarPath !== '' ?
                             <div>
-                                <StorageImage alt="avatar" path={avatarPath}/>
+                                <StorageImage alt="avatar" path={avatarPath} />
                                 <p>{avatarPath}</p>
                             </div>
                             : ''
                     }
-                    <input type="file" onChange={selectAvatarImage} ref={selectAvatarFileRef}/>
+                    <input type="file" onChange={selectAvatarImage} ref={selectAvatarFileRef} />
                     <button onClick={uploadAvatar} className="btn-sm btn text-base">Change Avatar</button>
                 </div>
                 <div className="divider divider-horizontal"></div>
@@ -307,11 +306,11 @@ export default function ListNurse() {
                             </div>
                             : ''
                     }
-                    <input type="file" onChange={selectPdfFile} ref={selectPdfFileRef}/>
+                    <input type="file" onChange={selectPdfFile} ref={selectPdfFileRef} />
                     <button onClick={uploadPdf} className="btn-sm btn text-base">Update PDF</button>
                     <div className="text-green-500 text-lg font-bold">{uploadPdfMsg}</div>
                     <DialogModal ref={previewPdfRef}>
-                        <PdfViewer src={pdfDownloadUrl}/>
+                        <PdfViewer src={pdfDownloadUrl} />
                     </DialogModal>
                 </div>
             </div>

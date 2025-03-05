@@ -18,8 +18,8 @@ export default function Dashboard() {
                         <div>
                             <JobDetail></JobDetail>
                         </div>
-                        <div className="flex justify-around mt-2">
-                            <div className="flex flex-col w-full  pr-3">
+                        <div className="flex justify-around mt-4">
+                            <div className="flex flex-col w-full  pr-6">
                                 <Candidate></Candidate>
                             </div>
                             <div className=" bg-white rounded-2xl h-fit max-w-[500px]">

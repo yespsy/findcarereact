@@ -15,7 +15,7 @@ export default function AdRight() {
     };
     return (
         <>
-            <div className="pt-8 w-[430px]">
+            <div className="pt-8">
                 <Slider {...settings}>
                     {Array.from({length: 7}).map((_, i: number) => {
                         const url = `/home/ad/${i+1}.webp`

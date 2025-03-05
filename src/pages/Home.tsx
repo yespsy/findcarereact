@@ -8,8 +8,6 @@ import CompanyTimeline from "./home/CompanyTimeline.tsx";
 import CompanyPartner from "./home/CompanyPartner.tsx";
 
 export default function Home() {
-    // const bears = useStore((state) => state.bears)
-    // const increase = useStore((state) => state.increase)
     return (
         <>
             <div className="bg-base-100 ">
@@ -28,24 +26,23 @@ export default function Home() {
 
                 <div className="flex justify-around">
                     <div className="flex flex-row md:basis-full lg:basis-11/12 xl:basis-10/12  2xl:basis-9/12  px-10 max-w-[1280px]">
-                        <div className="flex flex-col basis-0656">
+                        <div className="flex flex-col basis-0656 h-[800px]">
                             <NurseCarousel></NurseCarousel>
                             <Comments></Comments>
                         </div>
-                        <div className="flex flex-col basis-0344">
+                        <div className="flex flex-col basis-0344 h-[800px] w-[400px]">
                             <AdRight></AdRight>
                             <Slogan></Slogan>
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-around">
+                <div className="flex justify-around pt-4">
                     <div className="w-[1180px]"><Video></Video></div>
                 </div>
-                <div className="flex justify-around mt-5">
-                    <div className="flex w-[1180px]">
-                        <div className="pb-7 bg-white min-w-[850px] rounded-lg mb-5"><CompanyTimeline></CompanyTimeline>
-                        </div>
-                        <div className="bg-white ml-3 w-full rounded-lg mb-5"><CompanyPartner></CompanyPartner></div>
+                <div className="flex justify-around mt-8">
+                    <div className="flex w-[1180px] justify-between">
+                        <div className="pb-7 bg-white min-w-[830px] rounded-lg mb-5"><CompanyTimeline></CompanyTimeline></div>
+                        <div className="bg-white ml-8 w-full rounded-lg mb-5"><CompanyPartner></CompanyPartner></div>
                     </div>
                 </div>
             </div>

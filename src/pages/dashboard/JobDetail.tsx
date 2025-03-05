@@ -31,7 +31,7 @@ export default function JobDetail() {
 
     return (
         <div className="bg-white w-full mb-3 rounded-2xl">
-            <div className="text-2xl pl-7 pt-5 font-bold">
+            <div className="text-3xl pl-7 pt-5 font-bold">
                 <span>發布的職位 (1/1)</span><span className="ml-8 text-primary">{job?.title}</span>
             </div>
             {onEdit ? (
@@ -47,10 +47,10 @@ export default function JobDetail() {
                          onClick={() => switchEdit()}></img>
                 </>
             )}
-            <div className="text-xl pl-7 pt-3 font-bold">
-                <span>{job?.nurseRank}</span><span className="ml-8 text-secondary">{job?.salary}</span>
+            <div className="text-22p pl-7 pt-3 font-bold">
+                <span>{job?.nurseRank}</span><span className="ml-8 text-[#EFAAE9]">{job?.salary}</span>
             </div>
-            <div className="text-lg pl-7 pt-1">
+            <div className="text-16p pl-7 pt-1">
                 <span className="text-gray-400">{job?.location} | {job?.onboardDate}</span>
             </div>
             <div className="min-h-36 rounded-lg bg-base-100 mx-7 mt-3 pb-3 shadow-lg shadow-gray-300">

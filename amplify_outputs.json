@@ -135,14 +135,15 @@
               "properties": {
                 "rules": [
                   {
-                    "allow": "public",
-                    "provider": "iam",
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
                     "operations": [
                       "create",
-                      "update",
-                      "delete",
-                      "read"
-                    ]
+                      "read",
+                      "update"
+                    ],
+                    "identityClaim": "cognito:username"
                   }
                 ]
               }
@@ -167,7 +168,7 @@
             "employerId": {
               "name": "employerId",
               "isArray": false,
-              "type": "ID",
+              "type": "String",
               "isRequired": false,
               "attributes": []
             },
@@ -271,7 +272,16 @@
                 "rules": [
                   {
                     "allow": "public",
-                    "provider": "iam",
+                    "provider": "apiKey",
+                    "operations": [
+                      "read"
+                    ]
+                  },
+                  {
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
+                    "identityClaim": "cognito:username",
                     "operations": [
                       "create",
                       "update",
@@ -302,7 +312,7 @@
             "employerId": {
               "name": "employerId",
               "isArray": false,
-              "type": "ID",
+              "type": "String",
               "isRequired": false,
               "attributes": []
             },
@@ -339,7 +349,7 @@
             "nurseId": {
               "name": "nurseId",
               "isArray": false,
-              "type": "ID",
+              "type": "String",
               "isRequired": false,
               "attributes": []
             },
@@ -413,8 +423,10 @@
               "properties": {
                 "rules": [
                   {
-                    "allow": "public",
-                    "provider": "iam",
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
+                    "identityClaim": "cognito:username",
                     "operations": [
                       "create",
                       "update",
@@ -550,6 +562,12 @@
                       "delete",
                       "read"
                     ]
+                  },
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "read"
+                    ]
                   }
                 ]
               }
@@ -578,11 +596,15 @@
           "files/*": {
             "guest": [
               "get",
-              "list"
+              "list",
+              "write",
+              "delete"
             ],
             "authenticated": [
               "get",
-              "list"
+              "list",
+              "write",
+              "delete"
             ]
           }
         }

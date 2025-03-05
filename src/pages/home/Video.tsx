@@ -3,13 +3,13 @@ import {Link} from "react-router-dom";
 export default function Video() {
     return (
         <>
-            <div className="pt-3 flex">
+            <div className="pt-4 flex">
                 <div className="">
                     <video src="https://findcare.id/wp-content/uploads/2024/12/Caregivers-at-nursing-home-2.mp4"
                            autoPlay={true}
                            loop muted playsInline={true}></video>
                 </div>
-                <div className="bg-secondary text-white text-lg p-5 rounded-r-xl w-[700px]">
+                <div className="bg-secondary text-white text-lg p-5 rounded-r-xl w-[1000px]">
                     <p>1. 搜護網的護理員有何特別之處？</p>
                     <p className="mt-3">我們所有的護理員都接受了專為香港家庭設計的專業培訓，其中包括由專業粵語導師提供的粵語課程，為與香港家庭的交流建立基礎。</p>
                     <p className="mt-3">2. 搜護網的護理員提供哪些專業護理？</p>

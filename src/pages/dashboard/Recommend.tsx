@@ -51,19 +51,19 @@ export default function Recommend() {
         <>
             <div className="flex justify-between">
                 <p className="ml-5 mt-5 font-bold text-2xl">智能推薦</p>
-                <img src='/common/icon_refresh.png' alt="" className="w-8 h-8 mr-10 mt-3"></img>
+                <div className="mr-6 mt-5 hover:cursor-pointer"><img src='/common/icon_refresh.png' alt="" className="w-8 h-8 inline"></img><span className="ml-2 underline underline-offset-4 text-primary text-xl">換一批</span></div>
             </div>
             <div className="pb-8 ml-1">
                 {nurses.map((n) => (
                     <div key={n.id}
-                         className="ml-4 mt-4 w-[220px] h-[280px] border-2 shadow-lg rounded-2xl inline-block">
-                        <StorageImage alt="findcare" path={n.avatarPath} width={220} height={165}/>
+                         className="ml-4 mt-4 w-[220px] border-2 shadow-lg rounded-2xl inline-block">
+                        <div className="p-1"><StorageImage alt="findcare" path={n.avatarPath} width={220} height={165}/></div>
                         <div className="flex flex-row max-w-full justify-between mx-3 my-1">
                             <div className="flex flex-row">
                                 <p className="flex text-lg font-bold w-fit">{n.name}</p>
                                 <img onClick={() => favor(n.id)} src={isFavor ? '/common/icon_favor.png' : '/common/icon_no_favor.png'}
                                      alt=""
-                                     width={27} height={20} className="ml-3 hover:cursor-pointer"/>
+                                     width={22} height={20} className="ml-3 hover:cursor-pointer"/>
                             </div>
                             <p className="text-secondary text-sm font-bold pt-1">{n.rank}</p>
                         </div>

@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 
 export default function Requirement() {
     const [nextPage, setNextPage] = useState(false);
+    const [qa, setQa] = useState({qa1: '', qa2: ''});
+
     const questions = [{
         index: 1,
         content: "是否對護理員的外觀或舉止有任何特別偏好？",
@@ -23,11 +25,11 @@ export default function Requirement() {
             <>
                 <div className="inline-block w-full">
                     <div className="float-left text-2xl ml-2 text-blue-600 font-bold">驗證信息</div>
-                    <div className="float-right text-xl mt-1 mr-2 underline-offset-auto text-gray-500">
-                        <a href="" onClick={() => setNextPage(false)}>返回上一步</a>
+                    <div className="float-right text-xl mt-1 mr-2 underline underline-offset-4 text-gray-500 hover:cursor-pointer">
+                        <div onClick={() => setNextPage(false)}>返回上一步</div>
                     </div>
                 </div>
-                <LoginInfo type="register"/>
+                <LoginInfo type="register" requirements = {qa} />
             </>
         )
     } else {
@@ -44,14 +46,17 @@ export default function Requirement() {
                     </li>
                 </ul>
                 {/*問卷*/}
-                {questions.map((item, index) => (
-                    <div key={index}>
-                        <p className="text-xl py-2 font-normal">{index + 1}.{item.content}</p>
-                        <textarea className="textarea textarea-bordered w-full"
-                                  placeholder=""></textarea>
-                        <p className="text-info">{item.notes}</p>
-                    </div>
-                ))}
+
+                <div>
+                    <p className="text-xl py-2 font-normal">1.{questions[0].content}</p>
+                    <textarea className="textarea textarea-bordered w-full" placeholder="" value={qa.qa1} onChange={(e) => setQa({...qa, qa1: e.target.value})}></textarea>
+                    <p className="text-info">{questions[0].notes}</p>
+                </div>
+                <div>
+                    <p className="text-xl py-2 font-normal">2.{questions[1].content}</p>
+                    <textarea className="textarea textarea-bordered w-full" placeholder="" value={qa.qa2} onChange={(e) => setQa({...qa, qa2: e.target.value})}></textarea>
+                    <p className="text-info">{questions[1].notes}</p>
+                </div>
 
                 <img src='/login/registry_steps_one.png' alt="findcare" className="my-4"></img>
                 <div className="flex flex-row mt-4 justify-items-center">

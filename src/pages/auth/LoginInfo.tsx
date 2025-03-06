@@ -8,14 +8,15 @@ import {jobService} from "../../api/jobService.ts";
 import CountdownControl from "./CountdownControl.tsx";
 
 interface LoginInfoProps {
-    type?: string
+    type?: string,
+    requirements?: { qa1: string; qa2: string }
 }
 
 enum AuthType {
     login = 'login', register = 'register'
 }
 
-export default function LoginInfo({type}: LoginInfoProps) {
+export default function LoginInfo({type, requirements}: LoginInfoProps) {
     const authType: AuthType = type === 'login' ? AuthType.login : AuthType.register;
     const navigate = useNavigate();
     const [number, setNumber] = useState('')
@@ -113,13 +114,9 @@ export default function LoginInfo({type}: LoginInfoProps) {
             }
         })
         if (signUpNextStep.signUpStep === 'CONFIRM_SIGN_UP') {
-            alert('短信已發送，請注意查收.')
-            // console.log(
-            //     `Code Delivery Medium: ${signUpNextStep.codeDeliveryDetails.deliveryMedium}`,
-            // );
-            // console.log(
-            //     `Code Delivery Destination: ${signUpNextStep.codeDeliveryDetails.destination}`,
-            // );
+            // alert('短信已發送，請注意查收.')
+            // console.log(`Code Delivery Medium: ${signUpNextStep.codeDeliveryDetails.deliveryMedium}`,);
+            // console.log(`Code Delivery Destination: ${signUpNextStep.codeDeliveryDetails.destination}`,);
         } else {
             alert('注册返回未处理代码： ' + signUpNextStep.signUpStep)
         }
@@ -140,7 +137,8 @@ export default function LoginInfo({type}: LoginInfoProps) {
                     handleErrorWithMessage(null, "注册失败,请联系管理员。signUpStepTwo");
                     return;
                 }
-                const job = await jobService.create(employer.id!)
+                const requirementStr = (requirements?.qa1 +'\n'+ requirements?.qa2).trim()
+                const job = await jobService.create(employer.id!, requirementStr)
                 if (!job) {
                     handleErrorWithMessage(null, "注册失败,请联系管理员。signUpStepTwo");
                     return

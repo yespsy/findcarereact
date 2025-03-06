@@ -25,22 +25,22 @@ export default function Home() {
                 </div>
 
                 <div className="flex justify-around">
-                    <div className="flex flex-row md:basis-full lg:basis-11/12 xl:basis-10/12  2xl:basis-9/12  px-10 max-w-[1280px]">
+                    <div className="flex flex-row  max-w-[1200px]">
                         <div className="flex flex-col basis-0656 h-[800px]">
                             <NurseCarousel></NurseCarousel>
                             <Comments></Comments>
                         </div>
-                        <div className="flex flex-col basis-0344 h-[800px] w-[400px]">
+                        <div className="flex flex-col basis-0344 h-[800px] w-[420px]">
                             <AdRight></AdRight>
                             <Slogan></Slogan>
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-around pt-4">
-                    <div className="w-[1180px]"><Video></Video></div>
+                <div className="flex justify-around mt-12">
+                    <div className="w-[1200px]"><Video></Video></div>
                 </div>
                 <div className="flex justify-around mt-8">
-                    <div className="flex w-[1180px] justify-between">
+                    <div className="flex w-[1200px] justify-between">
                         <div className="pb-7 bg-white min-w-[830px] rounded-lg mb-5"><CompanyTimeline></CompanyTimeline></div>
                         <div className="bg-white ml-8 w-full rounded-lg mb-5"><CompanyPartner></CompanyPartner></div>
                     </div>

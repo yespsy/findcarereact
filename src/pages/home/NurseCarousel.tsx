@@ -36,11 +36,11 @@ export default function NurseCarousel() {
     }, []);
     return (
         <>
-            <div className="flex flex-row justify-between pt-8 mr-4">
+            <div className="flex flex-row justify-between pt-8 mr-8">
                 {nurses.map((n) => (
-                    <div key={n.id} className="max-w-full w-[220px] h-[280px] border-2 shadow-lg rounded-2xl mr-2 bg-white">
+                    <div key={n.id} className="max-w-full w-[235px] border-2 shadow-lg rounded-2xl bg-white">
                         <div className="flex justify-around p-0.5">
-                            <StorageImage alt="findcare" path={n.avatarPath} onGetUrlError={(e) => console.dir(e)}/>
+                            <StorageImage alt="findcare" path={n.avatarPath} width={227} height={170} className="rounded-xl p-0.5"/>
                         </div>
                         <div className="flex flex-row max-w-full justify-between mx-3 my-1">
                             <p className="text-lg font-bold">{n.name}</p>
@@ -51,7 +51,7 @@ export default function NurseCarousel() {
                         </div>
                         <div className="flex flex-row max-w-full justify-between mx-3 mt-2 text-xs">
                             <p className="text-gray-400 font-bold">Experience</p>
-                            <p className="font-bold">{n.experience}</p>
+                            <p className="font-bold text-nowrap">{n.experience}</p>
                         </div>
                         <div className="flex flex-row max-w-full justify-between mx-3 my-1 text-xs">
                             <p className="text-gray-400 font-bold mt-1">Preview PDF</p>

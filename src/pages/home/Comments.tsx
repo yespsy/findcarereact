@@ -49,12 +49,12 @@ export default function Comments() {
     }
 
     return (
-        <div className="pt-5 mt-5 pb-1 bg-white rounded-xl mr-8 flex justify-around">
+        <div className="pt-3 mt-5 pb-1 bg-white rounded-xl mr-8 flex justify-around">
             <table className="table-auto w-auto mb-4 ml-5 mr-4">
                 <tbody className="">
                 <tr>
                     <td colSpan={2}>
-                        <div className="flex justify-between">
+                        <div className="flex justify-between -mb-2">
                             <p className="text-3xl font-bold ml-2">僱主評價</p>
                             <Link to="/" className="text-xl font-bold text-secondary underline-offset-8 underline">查看更多</Link>
                         </div>

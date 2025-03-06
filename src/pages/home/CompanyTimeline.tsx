@@ -46,7 +46,7 @@ export default function Page() {
                     </li>
                     <li>
                         <hr className="my-5 bg-pink-600"/>
-                        <div className="float-left text-nowrap absolute mt-20 ml-[540px] text-gray-500 text-lg">
+                        <div className="float-left text-nowrap absolute mt-20 ml-[510px] text-gray-500 text-lg">
                             Got introductions from the caregivers
                         </div>
                         {item('Oct', 'Cooperated With LoveCare')}

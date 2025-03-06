@@ -51,28 +51,29 @@ export default function Recommend() {
         <>
             <div className="flex justify-between">
                 <p className="ml-5 mt-5 font-bold text-2xl">智能推薦</p>
-                <div className="mr-6 mt-5 hover:cursor-pointer"><img src='/common/icon_refresh.png' alt="" className="w-8 h-8 inline"></img><span className="ml-2 underline underline-offset-4 text-primary text-xl">換一批</span></div>
+                <div className="mr-6 mt-5 hover:cursor-pointer"><img src='/common/icon_refresh.png' alt="" className="w-8 h-8 inline"></img><span
+                    className="ml-2 underline underline-offset-4 text-primary text-xl">換一批</span></div>
             </div>
-            <div className="pb-8 ml-1">
+            <div className="pb-6 ml-1">
                 {nurses.map((n) => (
                     <div key={n.id}
-                         className="ml-4 mt-4 w-[220px] border-2 shadow-lg rounded-2xl inline-block">
-                        <div className="p-1"><StorageImage alt="findcare" path={n.avatarPath} width={220} height={165}/></div>
+                         className="ml-4 mt-5 w-[220px] border-2 shadow-lg rounded-2xl inline-block">
+                        <div><StorageImage alt="findcare" path={n.avatarPath} width={220} height={165} className="rounded-xl p-0.5"/></div>
                         <div className="flex flex-row max-w-full justify-between mx-3 my-1">
                             <div className="flex flex-row">
-                                <p className="flex text-lg font-bold w-fit">{n.name}</p>
-                                <img onClick={() => favor(n.id)} src={isFavor ? '/common/icon_favor.png' : '/common/icon_no_favor.png'}
-                                     alt=""
-                                     width={22} height={20} className="ml-3 hover:cursor-pointer"/>
+                                <div className="flex text-lg font-bold w-fit">{n.name}</div>
+                                <div><img onClick={() => favor(n.id)} src={isFavor ? '/common/icon_favor.png' : '/common/icon_no_favor.png'}
+                                           alt=""
+                                           width={20} height={20} className="ml-2 hover:cursor-pointer"/></div>
                             </div>
-                            <p className="text-secondary text-sm font-bold pt-1">{n.rank}</p>
+                            <p className="text-secondary text-sm font-bold pt-0.5">{n.rank}</p>
                         </div>
                         <div className="rounded-lg bg-[#43A047] max-w-fit ml-3">
                             <p className="text-white text-xs px-3 py-0.5">{n.status}</p>
                         </div>
                         <div className="flex flex-row max-w-full justify-between mx-3 mt-2 text-xs">
                             <p className="text-gray-400 font-bold">Experience</p>
-                            <p className="font-bold">{n.experience}</p>
+                            <p className="font-bold text-nowrap">{n.experience}</p>
                         </div>
                         <div className="flex flex-row max-w-full justify-between mx-3 my-1 text-xs">
                             <p className="text-gray-400 font-bold mt-1">Preview PDF</p>

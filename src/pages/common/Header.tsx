@@ -1,15 +1,10 @@
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Logout from "../auth/Logout.tsx";
-import { useEffect, useState } from 'react';
-import { isUserLogin } from "../../api/utils.ts";
+import {useStore} from "zustand/react";
+import {useEmployerStore} from "../../stores/useStore.ts";
 
 export default function Header() {
-    const [isLogin, setIsLogin] = useState(false)
-    useEffect(() => {
-        isUserLogin().then(isLogin => {
-            setIsLogin(isLogin)
-        })
-    }, []);
+    const app = useStore(useEmployerStore, state => state.app)
 
     return (
         <>
@@ -24,12 +19,12 @@ export default function Header() {
                     </Link>
                     <div className="flex flex-row items-center justify-between">
                         {
-                            isLogin ? (
+                            app.isLogin ? (
                                 <Link to="/dashboard"
-                                    className="head-btn-color text-2xl font-medium pl-2 break-keep">首页</Link>
+                                      className="head-btn-color text-2xl font-medium pl-2 break-keep">首页</Link>
                             ) : (
                                 <Link to="/login"
-                                    className="btn bg-blue-500 text-white text-xl font-normal rounded-3xl hover:bg-secondary">
+                                      className="btn bg-blue-500 text-white text-xl font-normal rounded-3xl hover:bg-secondary">
                                     登陸/註冊
                                 </Link>
                             )
@@ -38,7 +33,7 @@ export default function Header() {
                         <Link to="/" className="head-btn-color text-2xl font-medium pl-5 break-keep">新知科普</Link>
                         <Link to="/" className="head-btn-color text-2xl font-medium pl-5 break-keep">聯繫客服</Link>
                         <Link to="/" className="head-btn-color text-2xl font-medium pl-5 break-keep">繁體中文</Link>
-                        <Logout />
+                        <Logout/>
                     </div>
                 </div>
             </div>

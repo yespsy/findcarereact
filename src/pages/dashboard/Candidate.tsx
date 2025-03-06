@@ -46,56 +46,56 @@ export default function Page() {
                             return '';
                         } else {
                             return (
-                                <>
-                                    <tbody>
-                                    {i == 0 ? (
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td className="text-20p font-normal text-nowrap">護理員狀態</td>
-                                            <td className="text-20p font-normal text-nowrap">預約面試時間</td>
-                                            <td></td>
-                                        </tr>
-                                    ) : (<></>)}
-                                    {i >= 1 ? (
-                                        <tr>
-                                            <td colSpan={4}>
-                                                <div className="divider mr-5 my-1"></div>
-                                            </td>
-                                        </tr>
-                                    ) : (
-                                        <div className="h-1">&nbsp;</div>
-                                    )}
-                                    <tr key={i}>
-                                        <td className="flex w-fit">
-                                            <div className="avatar ml-5 min-w-[80px]">
-                                                <div className="rounded-full mask mask-circle">
-                                                    <div className="w-[70px] h-[70px]">
-                                                        <StorageImage alt="findcare" path={c.nurse ? c.nurse.avatarPath : ''} sizes="(max-width: 100%) 50vw (max-height: 100%) 50vw"></StorageImage>
-                                                    </div>
+                                <tbody key={i}>
+                                {i == 0 ? (
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td className="text-20p font-normal text-nowrap">護理員狀態</td>
+                                        <td className="text-20p font-normal text-nowrap">預約面試時間</td>
+                                        <td></td>
+                                    </tr>
+                                ) : (<></>)}
+                                {i >= 1 ? (
+                                    <tr>
+                                        <td colSpan={4}>
+                                            <div className="divider mr-5 my-1"></div>
+                                        </td>
+                                    </tr>
+                                ) : (
+                                    <tr className="h-1">
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                )}
+                                <tr key={i}>
+                                    <td className="flex w-fit">
+                                        <div className="avatar ml-5 min-w-[80px]">
+                                            <div className="rounded-full mask mask-circle">
+                                                <div className="w-[70px] h-[70px]">
+                                                    <StorageImage alt="findcare" path={c.nurse ? c.nurse.avatarPath : ''} sizes="(max-width: 100%) 50vw (max-height: 100%) 50vw"></StorageImage>
                                                 </div>
                                             </div>
-                                            <div className="ml-3 w-full">
-                                                <div className="text-3xl font-bold">{c.nurse ? c.nurse.name : ''}</div>
-                                                <div className="text-xl text-gray-400 font-normal break-keep text-nowrap">Preview PDF</div>
-                                            </div>
-                                        </td>
-                                        <td className="w-fit">
-                                            <div onClick={() => previewPDf(c.nurse)} className="hover:cursor-pointer w-fit">
-                                                <img src='/common/pdf_download.png' alt="" width={50} height={50} className="pt-1"></img>
-                                            </div>
-                                        </td>
-                                        <td className="justify-items-center">
-                                            <div className="bg-warning py-2 px-5 rounded-xl text-white text-xl font-bold w-fit hover:cursor-pointer">
-                                                <p className="w-[40px]">{c.status}</p>
-                                            </div>
-                                        </td>
-                                        <td className="text-center text-xl text-primary">{split(c.interviewDate)[0]}<br/>{split(c.interviewDate)[1]}
-                                        </td>
-                                        <td className="w-fit"></td>
-                                    </tr>
-                                    </tbody>
-                                </>
+                                        </div>
+                                        <div className="ml-3 w-full">
+                                            <div className="text-3xl font-bold">{c.nurse ? c.nurse.name : ''}</div>
+                                            <div className="text-xl text-gray-400 font-normal break-keep text-nowrap">Preview PDF</div>
+                                        </div>
+                                    </td>
+                                    <td className="w-fit">
+                                        <div onClick={() => previewPDf(c.nurse)} className="hover:cursor-pointer w-fit">
+                                            <img src='/common/pdf_download.png' alt="" width={50} height={50} className="pt-1"></img>
+                                        </div>
+                                    </td>
+                                    <td className="justify-items-center">
+                                        <div className="bg-warning py-2 px-5 rounded-xl text-white text-xl font-bold w-fit hover:cursor-pointer">
+                                            <p className="w-[40px]">{c.status}</p>
+                                        </div>
+                                    </td>
+                                    <td className="text-center text-xl text-primary">{split(c.interviewDate)[0]}<br/>{split(c.interviewDate)[1]}
+                                    </td>
+                                    <td className="w-fit"></td>
+                                </tr>
+                                </tbody>
                             )
                         }
                     })}

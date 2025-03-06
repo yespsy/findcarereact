@@ -26,3 +26,5 @@ dist-ssr
 dist/*
 .amplify/*
 /qodana.yaml
+.fleet/*
+pnpm-lock.yaml

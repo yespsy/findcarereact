@@ -62,8 +62,6 @@ function convertToEntity(e: EmployerAll) {
             })
         })
     }
-    console.dir(e);
-    console.dir(employer);
     return employer
 }
 

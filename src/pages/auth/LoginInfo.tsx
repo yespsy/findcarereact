@@ -5,6 +5,7 @@ import {employerService} from "../../api/employerService.ts";
 import {handleErrorWithMessage} from "../../api/utils.ts";
 import {useEmployerStore} from "../../stores/useStore.ts";
 import {jobService} from "../../api/jobService.ts";
+import CountdownControl from "./CountdownControl.tsx";
 
 interface LoginInfoProps {
     type?: string
@@ -52,7 +53,7 @@ export default function LoginInfo({type}: LoginInfoProps) {
     /* 点击 发送验证码 */
     async function onClickSendVerificationCode() {
         if (!checkPhoneNumber()) {
-            return;
+            return false;
         }
         if (authType === AuthType.login) {
             await signInStepOne();
@@ -65,8 +66,10 @@ export default function LoginInfo({type}: LoginInfoProps) {
                 } else {
                     alert(JSON.stringify(error))
                 }
+                return false;
             }
         }
+        return true;
     }
 
     // 点击 注册/登陆
@@ -166,7 +169,7 @@ export default function LoginInfo({type}: LoginInfoProps) {
         })
         //TODO 若用户未注册，但在登陆界面点击发送验证码，这种情况下不会收到短信，是否需要先检查用户是否存在？若无消息提示，用户可能会感到困惑
         if (signInNextStep.signInStep === 'CONFIRM_SIGN_IN_WITH_SMS_CODE') {
-            alert('短信已發送，請注意查收.')
+            // alert('短信已發送，請注意查收.')
         } else {
             console.dir(signInNextStep);
             alert('登陆返回未处理代码： ' + signInNextStep.signInStep)
@@ -186,8 +189,7 @@ export default function LoginInfo({type}: LoginInfoProps) {
                 return;
             }
             setEmployer(employer)
-            alert('注册成功！');
-            navigate('/dashboard')
+            useEmployerStore.getState().setLogin(true)
             navigate('/dashboard')
         } else {
             alert('出錯了！')
@@ -216,9 +218,7 @@ export default function LoginInfo({type}: LoginInfoProps) {
             <div className="flex flex-row border-2 rounded-xl mt-8 w-[487px] py-1">
                 <input type="text" placeholder="短信驗證碼" className="input w-full bg-white text-xl mr-9"
                        value={verificationCode} onChange={e => setVerificationCode(e.target.value)}/>
-                <button className="btn bg-white border-0 text-xl text-primary font-medium pr-6"
-                        onClick={() => onClickSendVerificationCode()}>發送驗證碼
-                </button>
+                <CountdownControl click={onClickSendVerificationCode}></CountdownControl>
             </div>
             <div className="h-0">
                 {(isShowVerificationError ?

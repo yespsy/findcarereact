@@ -43,7 +43,7 @@ export default function Recommend() {
 
     async function favor(nurseId: string | undefined) {
         if (!nurseId) return;
-        const candidate = await candidateService.add(employer.id, nurseId);
+        const candidate = await candidateService.add(employer.id, nurseId, true);
         if (candidate) addCandidate(candidate)
     }
 

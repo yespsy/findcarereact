@@ -28,10 +28,18 @@ export default function Page() {
         previewPdfRef.current.show();
     }
 
+    function getCandidateCount() {
+        if(!nurses){
+            return '0'
+        }else{
+            return nurses?.length
+        }
+    }
+
     return (
         <div className="bg-white rounded-xl mb-5">
             <div className="flex text-24p font-bold ml-7 mt-5 justify-between mr-4">
-                <div>候選人&nbsp;&nbsp;（{nurses?.length}）</div>
+                <div>候選人&nbsp;&nbsp;（{getCandidateCount()}）</div>
                 <div className="text-22p text-primary font-normal">面試幣剩餘&nbsp;：{employer.coin}</div>
             </div>
             <div>

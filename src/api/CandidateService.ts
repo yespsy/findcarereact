@@ -10,8 +10,8 @@ const client = generateClient<Schema>();
 Amplify.configure(outputs);
 
 export const candidateService = {
-    add: async (employerId: string, nurseId: string) => {
-        const {errors, data} = await client.models.Candidate.create({employerId, nurseId}, {authMode: 'userPool'});
+    add: async (employerId: string, nurseId: string, isFavor:boolean) => {
+        const {errors, data} = await client.models.Candidate.create({employerId, nurseId, isFavor}, {authMode: 'userPool'});
         if (errors) {
             handleError(errors)
             return null;

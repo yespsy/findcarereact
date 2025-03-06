@@ -12,6 +12,7 @@ type EmployerStoreActions = {
     setEmployer: (employer: Employer) => void,
     setJob: (job: Job) => void,
     addCandidate: (candidate: Candidate) => void,
+    removeCandidate: (id: string) => void,
     clear: () => void,
     updateRequirements: (requirements: string, extraRequirements: string) => void,
     setLogin: (loginStatus: boolean) => void
@@ -50,6 +51,18 @@ export const useEmployerStore = createStore<EmployerStore>()(
                     }
                 })
             },
+            removeCandidate: (id) => set(state => {
+                let ary: Candidate[] = []
+                if (state.employer.candidates) {
+                    ary = state.employer.candidates.filter(candidate => candidate.id !== id)
+                }
+                return {
+                    employer: {
+                        ...state.employer,
+                        candidates: ary
+                    }
+                }
+            }),
             updateRequirements: (requirements, extraRequirements) => {
                 set(state => {
                     if (!state.employer.job) {

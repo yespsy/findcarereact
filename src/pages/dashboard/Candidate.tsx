@@ -6,6 +6,7 @@ import DialogModal from "../common/DialogModal";
 import {StorageImage} from "@aws-amplify/ui-react-storage";
 import {useEmployerStore} from "../../stores/useStore.ts";
 import {useStore} from "zustand/react";
+import {candidateService} from "../../api/CandidateService.ts";
 
 export default function Page() {
     const employer = useStore(useEmployerStore, state => state.employer)
@@ -29,10 +30,17 @@ export default function Page() {
     }
 
     function getCandidateCount() {
-        if(!nurses){
+        if (!nurses) {
             return '0'
-        }else{
+        } else {
             return nurses?.length
+        }
+    }
+
+    async function disFavor(id: string) {
+        const isSuc = await candidateService.disfavor(id)
+        if (isSuc) {
+            useEmployerStore.getState().removeCandidate(id)
         }
     }
 
@@ -83,6 +91,8 @@ export default function Page() {
                                                     <StorageImage alt="findcare" path={c.nurse ? c.nurse.avatarPath : ''} sizes="(max-width: 100%) 50vw (max-height: 100%) 50vw"></StorageImage>
                                                 </div>
                                             </div>
+                                            {c.isFavor ? (<div className="w-[25px] h-[25px] z-10 absolute ml-14 -mt-2 hover:cursor-pointer" onClick={() => disFavor(c.id)}><img
+                                                src="../../../public/dashboard/favor.png" alt=""/></div>) : <></>}
                                         </div>
                                         <div className="ml-3 w-full">
                                             <div className="text-3xl font-bold">{c.nurse ? c.nurse.name : ''}</div>

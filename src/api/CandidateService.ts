@@ -10,7 +10,7 @@ const client = generateClient<Schema>();
 Amplify.configure(outputs);
 
 export const candidateService = {
-    add: async (employerId: string, nurseId: string, isFavor:boolean) => {
+    add: async (employerId: string, nurseId: string, isFavor: boolean) => {
         const {errors, data} = await client.models.Candidate.create({employerId, nurseId, isFavor}, {authMode: 'userPool'});
         if (errors) {
             handleError(errors)
@@ -44,4 +44,12 @@ export const candidateService = {
         }
         return candidate;
     },
+    disfavor: async (id: string) => {
+        const {errors, data} = await client.models.Candidate.delete({id}, {authMode: 'userPool'})
+        if (errors) {
+            handleError(errors)
+            return false;
+        }
+        return !!data;
+    }
 }

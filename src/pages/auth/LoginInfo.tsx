@@ -147,6 +147,7 @@ export default function LoginInfo({type}: LoginInfoProps) {
                 }
                 setEmployer(employer)
                 useEmployerStore.getState().setJob(job)
+                useEmployerStore.getState().setLogin(true)
                 alert('注册成功！');
                 navigate('/dashboard')
             }

@@ -67,8 +67,8 @@ export default function Page() {
                                     <tr>
                                         <td></td>
                                         <td></td>
-                                        <td className="text-20p font-normal text-nowrap">護理員狀態</td>
-                                        <td className="text-20p font-normal text-nowrap">預約面試時間</td>
+                                        <td className="text-20p font-normal text-nowrap text-center">護理員狀態</td>
+                                        <td className="text-20p font-normal text-nowrap text-center">預約面試時間</td>
                                         <td></td>
                                     </tr>
                                 ) : (<></>)}
@@ -87,12 +87,12 @@ export default function Page() {
                                     <td className="flex w-fit">
                                         <div className="avatar ml-5 min-w-[80px]">
                                             <div className="rounded-full mask mask-circle">
-                                                <div className="w-[70px] h-[70px]">
+                                                <div className="w-[77px] h-[77px]">
                                                     <StorageImage alt="findcare" path={c.nurse ? c.nurse.avatarPath : ''} sizes="(max-width: 100%) 50vw (max-height: 100%) 50vw"></StorageImage>
                                                 </div>
                                             </div>
                                             {c.isFavor ? (<div className="w-[25px] h-[25px] z-10 absolute ml-14 -mt-2 hover:cursor-pointer" onClick={() => disFavor(c.id)}><img
-                                                src="../../../public/dashboard/favor.png" alt=""/></div>) : <></>}
+                                                src="/dashboard/favor.png" alt=""/></div>) : <></>}
                                         </div>
                                         <div className="ml-3 w-full">
                                             <div className="text-3xl font-bold">{c.nurse ? c.nurse.name : ''}</div>

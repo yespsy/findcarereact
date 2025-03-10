@@ -7,24 +7,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    fontSize: {
-      sm: '0.8rem',
-      base: '1rem',
-      xl: '1.25rem',
-      '16p': '1.33rem',
-      '2xl': '1.563rem',
-      '20p': '1.66rem',
-      '22p': '1.75rem',
-      '24p': '2rem',
-      '3xl': '1.953rem',
-      '4xl': '2.441rem',
-      '5xl': '3.052rem',
-      '6xl': '3.75rem',
-      '7xl': '4.5rem',
-      '8xl': '6rem',
-      '9xl': '8rem',
-    },
     extend: {
+      fontSize: {
+        '16p': '1.33rem',
+        '22px': '1.422rem',
+        '24px': '1.563rem',
+        '20p': '1.66rem',
+        '22p': '1.75rem',
+        '24p': '2rem',
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

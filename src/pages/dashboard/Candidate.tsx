@@ -46,14 +46,14 @@ export default function Page() {
 
     return (
         <div className="bg-white rounded-xl mb-5">
-            <div className="flex text-24p font-bold ml-7 mt-5 justify-between mr-4">
-                <div>候選人&nbsp;&nbsp;（{getCandidateCount()}）</div>
-                <div className="text-22p text-primary font-normal">面試幣剩餘&nbsp;：{employer.coin}</div>
+            <div className="flex text-24px font-bold ml-7 mt-5 justify-between mr-4">
+                <div>候選人({getCandidateCount()})</div>
+                <div className="text-22px text-primary font-normal">面試幣剩餘&nbsp;：{employer.coin}</div>
             </div>
             <div>
                 <CandidateFilter update={setFilterStr}/>
             </div>
-            <div className="h-[595px] mr-3 overflow-auto">
+            <div className="h-[605px] mr-3 overflow-auto mb-3">
                 <table className="table-auto w-full">
                     {nurses?.map((c, i) => {
                         if ((filterStr === 'favor' && !c.isFavor)
@@ -64,11 +64,11 @@ export default function Page() {
                             return (
                                 <tbody key={i}>
                                 {i == 0 ? (
-                                    <tr>
+                                    <tr className="sticky top-0 z-20 bg-white">
                                         <td></td>
                                         <td></td>
-                                        <td className="text-20p font-normal text-nowrap text-center">護理員狀態</td>
-                                        <td className="text-20p font-normal text-nowrap text-center">預約面試時間</td>
+                                        <td className="text-22px font-normal text-nowrap text-center">護理員狀態</td>
+                                        <td className="text-22px font-normal text-nowrap text-center">預約面試時間</td>
                                         <td></td>
                                     </tr>
                                 ) : (<></>)}
@@ -79,8 +79,8 @@ export default function Page() {
                                         </td>
                                     </tr>
                                 ) : (
-                                    <tr className="h-1">
-                                        <td>&nbsp;</td>
+                                    <tr>
+                                        <td className="leading-[5px]">&nbsp;</td>
                                     </tr>
                                 )}
                                 <tr key={i}>
@@ -101,12 +101,12 @@ export default function Page() {
                                     </td>
                                     <td className="w-fit">
                                         <div onClick={() => previewPDf(c.nurse)} className="hover:cursor-pointer w-fit">
-                                            <img src='/common/pdf_download.png' alt="" width={50} height={50} className="pt-1"></img>
+                                            <img src='/common/pdf_download.png' alt="" width={50} height={50} className="pt-1 min-w-[50px]"></img>
                                         </div>
                                     </td>
                                     <td className="justify-items-center">
-                                        <div className="bg-warning py-2 px-5 rounded-xl text-white text-xl font-bold w-fit hover:cursor-pointer">
-                                            <p className="w-[40px]">{c.status}</p>
+                                        <div className="bg-warning py-1 px-3 rounded-xl text-white text-22px  font-bold w-fit hover:cursor-pointer">
+                                            <p className="w-[46px]">{c.status}</p>
                                         </div>
                                     </td>
                                     <td className="text-center text-xl text-primary">{split(c.interviewDate)[0]}<br/>{split(c.interviewDate)[1]}

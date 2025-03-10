@@ -25,8 +25,8 @@ export default function CandidateFilter({update}: CandidateFilterProps) {
     const itemImgCls = "inline-block w-8 h-8 mr-2 ml-1 my-3"
     return (
         <details className="dropdown z-20" ref={myRef}>
-            <summary className="mt-3 ml-7 text-22p font-bold text-primary">{filterName}</summary>
-            <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-64 py-0 mt-2 ml-6 px-0 shadow-xl text-22p divide-y divide-[#98A2B3] font-normal">
+            <summary className="mt-3 ml-7 text-22px font-bold text-primary">{filterName}</summary>
+            <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-64 py-0 mt-2 ml-6 px-0 shadow-xl text-22px divide-y divide-[#98A2B3] font-normal">
                 <li onClick={(e) => onClick(e, 'all')}>
                     <a><img alt='' src="/dashboard/user.png" className={itemImgCls} />全部{filterName==='全部'?selected():''}</a>
                 </li>

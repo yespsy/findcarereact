@@ -43,9 +43,9 @@ export default function Recommend() {
 
     async function favor(nurseId: string | undefined) {
         if (!nurseId) return;
-        if(useEmployerStore.getState().employer.candidates?.find(candidate => candidate?.nurse?.id === nurseId)){
-            return
-        }
+        // if(useEmployerStore.getState().employer.candidates?.find(candidate => candidate?.nurse?.id === nurseId)){
+        //     return
+        // }
         const candidate = await candidateService.add(employer.id, nurseId, true);
         if (candidate) addCandidate(candidate)
     }
@@ -57,10 +57,10 @@ export default function Recommend() {
                 <div className="mr-6 mt-5 hover:cursor-pointer"><img src='/common/icon_refresh.png' alt="" className="w-8 h-8 inline"></img><span
                     className="ml-2 underline underline-offset-4 text-primary text-xl">換一批</span></div>
             </div>
-            <div className="pb-6 ml-1">
+            <div className="pb-14 ml-1">
                 {nurses.map((n) => (
                     <div key={n.id}
-                         className="ml-4 mt-5 w-[220px] border-2 shadow-lg rounded-2xl inline-block">
+                         className="ml-4 mt-6 w-[220px] border-2 shadow-lg rounded-2xl inline-block">
                         <div><StorageImage alt="findcare" path={n.avatarPath} width={220} height={165} className="rounded-xl p-0.5"/></div>
                         <div className="flex flex-row max-w-full justify-between mx-3 my-1">
                             <div className="flex flex-row">

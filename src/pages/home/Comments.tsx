@@ -19,7 +19,7 @@ export default function Comments() {
 
     function commentTd(c: { name: string; data: string; rank: number; title: string; content: string }) {
         return (
-            <div className="bg-base-100 rounded-2xl shadow-lg shadow-gray-400 p-5 pl-6 pb-6 mt-4">
+            <div className="bg-base-100 rounded-2xl shadow-lg shadow-gray-400 p-5 pl-6 pb-6 mt-6">
                 <p className="w-[300px] text-2xl font-bold text-nowrap text-ellipsis overflow-hidden ...">{c.title}&nbsp;</p>
                 <div className="flex justify-between pt-1">
                     <div>
@@ -49,12 +49,12 @@ export default function Comments() {
     }
 
     return (
-        <div className="pt-3 mt-5 pb-1 bg-white rounded-xl mr-8 flex justify-around">
-            <table className="table-auto w-auto mb-4 ml-5 mr-4">
+        <div className="pt-4 mt-6 bg-white rounded-xl mr-8 flex justify-around">
+            <table className="table-auto w-auto mb-6 ml-5 mr-4">
                 <tbody className="">
                 <tr>
                     <td colSpan={2}>
-                        <div className="flex justify-between -mb-2">
+                        <div className="flex justify-between">
                             <p className="text-3xl font-bold ml-2">僱主評價</p>
                             <Link to="/" className="text-xl font-bold text-secondary underline-offset-8 underline">查看更多</Link>
                         </div>

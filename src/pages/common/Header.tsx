@@ -24,7 +24,7 @@ export default function Header() {
                                       className="head-btn-color text-2xl font-medium pl-2 break-keep">首页</Link>
                             ) : (
                                 <Link to="/login"
-                                      className="btn bg-blue-500 text-white text-xl font-normal rounded-3xl hover:bg-secondary">
+                                      className="btn bg-blue-500 text-white text-2xl font-normal rounded-3xl hover:bg-secondary">
                                     登陸/註冊
                                 </Link>
                             )

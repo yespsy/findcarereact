@@ -43,9 +43,10 @@ export default function Recommend() {
 
     async function favor(nurseId: string | undefined) {
         if (!nurseId) return;
-        // if(useEmployerStore.getState().employer.candidates?.find(candidate => candidate?.nurse?.id === nurseId)){
-        //     return
-        // }
+        // 不加重复的
+        if(useEmployerStore.getState().employer.candidates?.find(candidate => candidate?.nurse?.id === nurseId)){
+            return
+        }
         const candidate = await candidateService.add(employer.id, nurseId, true);
         if (candidate) addCandidate(candidate)
     }

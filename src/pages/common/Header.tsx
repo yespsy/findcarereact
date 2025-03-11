@@ -31,7 +31,7 @@ export default function Header() {
                     </Link>
                     <div className="flex flex-row items-center justify-between">
                         {
-                            !app.isLogin ? (
+                            app.isLogin ? (
                                 <RenderHomeButton/>
                             ) : (
                                 <Link to="/login"

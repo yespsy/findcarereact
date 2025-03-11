@@ -31,7 +31,7 @@ export default function LoginInfo({type, requirements}: LoginInfoProps) {
 
     function checkPhoneNumber() {
         // 验证手机号格式
-        const phoneNumberPattern = /^\d+$/;
+        const phoneNumberPattern = /^\d{8}$/;
         if (!phoneNumberPattern.test(number)) {
             // alert('請輸入有效的8位手機號.');
             console.log('number false')

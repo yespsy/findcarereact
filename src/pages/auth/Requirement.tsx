@@ -29,7 +29,7 @@ export default function Requirement() {
                         <div onClick={() => setNextPage(false)}>返回上一步</div>
                     </div>
                 </div>
-                <LoginInfo type="register" requirements = {qa} />
+                <LoginInfo type="register" requirements={qa}/>
             </>
         )
     } else {
@@ -46,26 +46,23 @@ export default function Requirement() {
                     </li>
                 </ul>
                 {/*問卷*/}
+                <form action={goNextPage}>
+                    <div>
+                        <p className="text-xl py-2 font-normal">1.{questions[0].content}<strong className="text-red-600">*</strong></p>
+                        <textarea required className="textarea textarea-bordered w-full" placeholder="" value={qa.qa1} onChange={(e) => setQa({...qa, qa1: e.target.value})}></textarea>
+                        <p className="text-info">{questions[0].notes}</p>
+                    </div>
+                    <div>
+                        <p className="text-xl py-2 font-normal">2.{questions[1].content}<strong className="text-red-600">*</strong></p>
+                        <textarea required className="textarea textarea-bordered w-full" placeholder="" value={qa.qa2} onChange={(e) => setQa({...qa, qa2: e.target.value})}></textarea>
+                        <p className="text-info">{questions[1].notes}</p>
+                    </div>
 
-                <div>
-                    <p className="text-xl py-2 font-normal">1.{questions[0].content}</p>
-                    <textarea className="textarea textarea-bordered w-full" placeholder="" value={qa.qa1} onChange={(e) => setQa({...qa, qa1: e.target.value})}></textarea>
-                    <p className="text-info">{questions[0].notes}</p>
-                </div>
-                <div>
-                    <p className="text-xl py-2 font-normal">2.{questions[1].content}</p>
-                    <textarea className="textarea textarea-bordered w-full" placeholder="" value={qa.qa2} onChange={(e) => setQa({...qa, qa2: e.target.value})}></textarea>
-                    <p className="text-info">{questions[1].notes}</p>
-                </div>
-
-                <img src='/login/registry_steps_one.png' alt="findcare" className="my-4"></img>
-                <div className="flex flex-row mt-4 justify-items-center">
-                    <button className="btn bg-primary border-0 text-xl text-white w-full font-medium h-14"
-                            onClick={() => {
-                                goNextPage()
-                            }}>下一步，驗證手機
-                    </button>
-                </div>
+                    <img src='/login/registry_steps_one.png' alt="findcare" className="my-4"></img>
+                    <div className="flex flex-row mt-4 justify-items-center">
+                        <input type="submit" value="下一步，驗證手機" className="btn bg-primary border-0 text-xl text-white w-full font-medium h-14"/>
+                    </div>
+                </form>
             </>
         );
     }

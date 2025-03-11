@@ -5,7 +5,7 @@ export default function Footer() {
         <div className="flex bg-white w-full justify-center py-10">
             <div className="text-4xl text-secondary font-bold pt-3">有聘請需要？ 註冊及關注我們的動向！</div>
             <Link to="/register" className="btn btn-lg bg-primary text-white text-3xl ml-5 hover:bg-secondary">立即註冊</Link>
-            <img src="/logo.png" alt="" className="ml-5 -mt-4"/>
+            <img src="/logo_origin.png" alt=""  className="ml-5 -mt-4 w-[90px] h-[90px]"/>
             <div className="text-blue-400 text-xl ml-2">
                 <p>掃碼下載</p>
                 <p>搜護綱App</p>

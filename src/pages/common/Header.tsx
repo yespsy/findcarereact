@@ -2,9 +2,21 @@ import {Link} from 'react-router-dom';
 import Logout from "../auth/Logout.tsx";
 import {useStore} from "zustand/react";
 import {useEmployerStore} from "../../stores/useStore.ts";
+import {useLocation} from 'react-router-dom';
 
 export default function Header() {
     const app = useStore(useEmployerStore, state => state.app)
+    const location = useLocation();
+
+    function RenderHomeButton() {
+        if (location.pathname === '/') {
+            return <Link to="/dashboard" className="btn bg-blue-500 text-white text-2xl font-medium rounded-3xl hover:bg-secondary break-keep">
+                <img src="/common/icon_mypage.png" alt="" className="w-[45px] h-[45px] -ml-4"/>
+                個人主頁</Link>
+        } else {
+            return <Link to="/" className="btn bg-blue-500 text-white text-2xl font-normal rounded-3xl hover:bg-secondary">首頁</Link>
+        }
+    }
 
     return (
         <>
@@ -19,10 +31,8 @@ export default function Header() {
                     </Link>
                     <div className="flex flex-row items-center justify-between">
                         {
-                           app.isLogin ? (
-                                <Link to="/dashboard" className="btn bg-blue-500 text-white text-2xl font-medium rounded-3xl hover:bg-secondary break-keep">
-                                    <img src="/common/icon_mypage.png" alt="" className="w-[45px] h-[45px] -ml-4" />
-                                    個人主頁</Link>
+                            !app.isLogin ? (
+                                <RenderHomeButton/>
                             ) : (
                                 <Link to="/login"
                                       className="btn bg-blue-500 text-white text-2xl font-normal rounded-3xl hover:bg-secondary">

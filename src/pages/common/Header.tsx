@@ -8,7 +8,7 @@ export default function Header() {
 
     return (
         <>
-            <div className="flex h-[118px] max-w-full justify-center">
+            <div className="flex h-[118px] w-auto justify-center">
                 <div className="flex items-center 2xl:basis-8/12 xl:basis-10/12 lg:basis-full justify-between ">
                     <Link to="/" className="flex flex-row items-center w-fit">
                         <img src="/logo.png" alt="findcare" className="w-[100px] h-[100px]"></img>
@@ -19,9 +19,10 @@ export default function Header() {
                     </Link>
                     <div className="flex flex-row items-center justify-between">
                         {
-                            app.isLogin ? (
-                                <Link to="/dashboard"
-                                      className="head-btn-color text-2xl font-medium pl-2 break-keep">首页</Link>
+                           app.isLogin ? (
+                                <Link to="/dashboard" className="btn bg-blue-500 text-white text-2xl font-medium rounded-3xl hover:bg-secondary break-keep">
+                                    <img src="/common/icon_mypage.png" alt="" className="w-[45px] h-[45px] -ml-4" />
+                                    個人主頁</Link>
                             ) : (
                                 <Link to="/login"
                                       className="btn bg-blue-500 text-white text-2xl font-normal rounded-3xl hover:bg-secondary">

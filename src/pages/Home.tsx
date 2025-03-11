@@ -10,7 +10,7 @@ import CompanyPartner from "./home/CompanyPartner.tsx";
 export default function Home() {
     return (
         <>
-            <div className="bg-base-100 ">
+            <div className="bg-base-100 w-fit">
                 <div className="">
                     <div className="flex flex-col justify-items-center w-full">
                         <div

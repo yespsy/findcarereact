@@ -4,12 +4,11 @@ export default function Page() {
     return (
         <>
             <div className="pt-12" >
-                {/*<Image src={Slogan} alt="findcare" className="max-w-full"></Image>*/}
                 <div className="flex flex-col justify-item-center bg-gray-700 rounded-xl w-full">
-                    <div className="text-center text-4xl text-white mt-[20px] absolute w-[390px]"><p>4月限時優惠</p></div>
-                    <div className="absolute text-center mt-[80px] w-[390px] ">
+                    <img src="/home/promotion.png" alt="promotion" className="max-w-full"></img>
+                    <div className="text-center text-4xl text-white mt-[20px] absolute w-[420px]"><p>4月限時優惠</p></div>
+                    <div className="absolute text-center mt-[80px] w-[420px] ">
                         <Link to="/register" className="text-2xl text-white btn bg-primary border-0 hover:bg-secondary">立即註冊</Link></div>
-                    <div><img src="/home/promotion.png" alt="promotion" className="max-w-full"></img></div>
                 </div>
             </div>
         </>);

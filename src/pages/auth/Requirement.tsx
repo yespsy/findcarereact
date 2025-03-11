@@ -35,7 +35,7 @@ export default function Requirement() {
     } else {
         return (
             <>
-                <ul className="menu menu-vertical lg:menu-horizontal bg-[#FDF1F7] rounded-xl w-full justify-center">
+                <ul className="menu menu-horizontal bg-[#FDF1F7] rounded-xl w-full justify-center">
                     <li className="w-1/2">
                         <Link to="/register"
                               className="flex text-xl font-semibold justify-center text-primary bg-white ">我要註冊</Link>

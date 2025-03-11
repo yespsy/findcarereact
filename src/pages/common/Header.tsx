@@ -34,7 +34,7 @@ export default function Header() {
             <div className="flex h-[118px] w-auto justify-center">
                 <div className="flex items-center 2xl:basis-8/12 xl:basis-10/12 lg:basis-full justify-between ">
                     <Link to="/" className="flex flex-row items-center w-fit">
-                        <img src="/logo.png" alt="findcare" className="w-[230px] h-[230px] -mt-5"></img>
+                        <img src="/logo.png" alt="findcare" className="w-[230px] h-[230px] -mt-5 min-w-[230px]"></img>
                     </Link>
                     <div className="flex flex-row items-center justify-between">
                         {

@@ -21,7 +21,7 @@ export default function AdRight() {
                         const url = `/home/ad/${i+1}.webp`
                         return (
                             <div key={i}>
-                                <img src={url} alt="findcare" className="rounded-circle"></img>
+                                <img src={url} alt="findcare" className="rounded-circle rounded-xl"></img>
                             </div>
                         )
                     })}

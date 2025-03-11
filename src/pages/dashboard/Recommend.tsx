@@ -58,7 +58,7 @@ export default function Recommend() {
                 <div className="mr-6 mt-5 hover:cursor-pointer"><img src='/common/icon_refresh.png' alt="" className="w-8 h-8 inline"></img><span
                     className="ml-2 underline underline-offset-4 text-primary text-xl">換一批</span></div>
             </div>
-            <div className="pb-14 ml-1">
+            <div className="pb-14 ml-1 min-w-[485px]">
                 {nurses.map((n) => (
                     <div key={n.id}
                          className="ml-4 mt-6 w-[220px] border-2 shadow-lg rounded-2xl inline-block">

@@ -7,7 +7,7 @@ export default function Video() {
                 <div className="">
                     <video src="https://findcare.id/wp-content/uploads/2024/12/Caregivers-at-nursing-home-2.mp4"
                            autoPlay={true}
-                           loop muted playsInline={true}></video>
+                           loop muted playsInline={true} className="rounded-l-xl"></video>
                 </div>
                 <div className="bg-secondary text-white text-lg p-5 rounded-r-xl w-[1000px]">
                     <p>1. 搜護網的護理員有何特別之處？</p>

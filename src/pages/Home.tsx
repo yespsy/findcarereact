@@ -41,7 +41,7 @@ export default function Home() {
                 </div>
                 <div className="flex justify-around mt-8">
                     <div className="flex w-[1200px] justify-between">
-                        <div className="pb-7 bg-white min-w-[750px] rounded-lg mb-5"><CompanyTimeline></CompanyTimeline></div>
+                        <div className="pb-7 bg-white min-w-[747px] rounded-lg mb-5"><CompanyTimeline></CompanyTimeline></div>
                         <div className="bg-white rounded-lg mb-5 w-[420px]"><CompanyPartner></CompanyPartner></div>
                     </div>
                 </div>

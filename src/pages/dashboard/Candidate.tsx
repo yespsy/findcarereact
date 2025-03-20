@@ -88,7 +88,7 @@ export default function Page() {
                                         <div className="avatar ml-5 min-w-[80px]">
                                             <div className="rounded-full mask mask-circle">
                                                 <div className="w-[77px] h-[77px]">
-                                                    <StorageImage alt="findcare" path={c.nurse ? c.nurse.avatarPath : ''} sizes="(max-width: 100%) 50vw (max-height: 100%) 50vw"></StorageImage>
+                                                    <StorageImage alt="findcare" path={c.nurse ? c.nurse.avatarPath : ''} sizes="(max-width: 100%) 50vw (max-height: 100%) 50vw" objectFit="cover" objectPosition="50% 50%"></StorageImage>
                                                 </div>
                                             </div>
                                             {c.isFavor ? (<div className="w-[25px] h-[25px] z-10 absolute ml-14 -mt-2 hover:cursor-pointer" onClick={() => disFavor(c.id)}><img

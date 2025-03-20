@@ -62,7 +62,7 @@ export default function Recommend() {
                 {nurses.map((n) => (
                     <div key={n.id}
                          className="ml-4 mt-6 w-[220px] border-2 shadow-lg rounded-2xl inline-block">
-                        <div><StorageImage alt="findcare" path={n.avatarPath} width={220} height={165} className="rounded-xl p-0.5"/></div>
+                        <div><StorageImage alt="findcare" path={n.avatarPath} width={220} height={165} objectFit="cover" objectPosition="50% 50%" className="rounded-xl p-0.5"/></div>
                         <div className="flex flex-row max-w-full justify-between mx-3 my-1">
                             <div className="flex flex-row">
                                 <div className="flex text-lg font-bold w-fit">{n.name}</div>

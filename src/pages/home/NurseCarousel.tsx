@@ -40,7 +40,7 @@ export default function NurseCarousel() {
                 {nurses.map((n) => (
                     <div key={n.id} className="max-w-full w-[235px] border-2 shadow-lg rounded-2xl bg-white">
                         <div className="flex justify-around p-0.5">
-                            <StorageImage alt="findcare" path={n.avatarPath} width={227} height={170} className="rounded-xl p-0.5"/>
+                            <StorageImage alt="findcare" path={n.avatarPath} width={227} height={170} objectFit="cover" objectPosition="50% 50%" className="rounded-xl p-0.5"/>
                         </div>
                         <div className="flex flex-row max-w-full justify-between mx-3 my-1">
                             <p className="text-lg font-bold">{n.name}</p>
